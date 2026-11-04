@@ -1,0 +1,521 @@
+:root {
+  --gh-bg: #0d1117;
+  --gh-canvas: #010409;
+  --gh-card: #161b22;
+  --gh-card-hover: #1c2128;
+  --gh-border: #30363d;
+  --gh-border-subtle: #21262d;
+  --gh-purple: #8957e5;
+  --gh-purple-glow: rgba(137, 87, 229, 0.25);
+  --gh-purple-light: #d2a8ff;
+  --gh-blue: #58a6ff;
+  --gh-blue-glow: rgba(88, 166, 255, 0.25);
+  --gh-blue-light: #79c0ff;
+  --gh-green: #3fb950;
+  --gh-green-light: #56d364;
+  --gh-coral: #f78166;
+  --gh-amber: #d29922;
+  --gh-text: #e6edf3;
+  --gh-text-primary: #ffffff;
+  --gh-muted: #8b949e;
+  --gh-accent-gradient: linear-gradient(135deg, #a371f7 0%, #58a6ff 50%, #2ea043 100%);
+  --gh-hub-gradient: linear-gradient(180deg, rgba(137, 87, 229, 0.15) 0%, rgba(88, 166, 255, 0.05) 50%, transparent 100%);
+}
+
+body {
+  background-color: var(--gh-canvas);
+  color: var(--gh-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Ambient Galactic Universe Glow */
+.universe-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(137, 87, 229, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(88, 166, 255, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(1, 4, 9, 0.95) 0%, var(--gh-canvas) 100%);
+}
+
+/* Reveal Overrides & Base Typography */
+.reveal {
+  font-size: 26px;
+  color: var(--gh-text);
+  z-index: 10;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-weight: 700;
+  color: var(--gh-text-primary);
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+.reveal h1 {
+  font-size: 2.2em;
+  margin-bottom: 0.2em;
+  background: var(--gh-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+  margin-bottom: 0.35em;
+}
+
+.slide-subtitle {
+  color: var(--gh-muted);
+  font-size: 0.88em;
+  margin-bottom: 1.1em;
+  font-weight: 400;
+}
+
+/* Top Navigation HUD */
+.top-hud {
+  position: fixed;
+  top: 14px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  pointer-events: auto;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gh-muted);
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.top-hud a {
+  color: var(--gh-blue);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+
+.top-hud a:hover {
+  color: var(--gh-blue-light);
+}
+
+.badge-universe {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(137, 87, 229, 0.15);
+  border: 1px solid rgba(137, 87, 229, 0.4);
+  color: var(--gh-purple-light);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.badge-segment {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background: rgba(88, 166, 255, 0.12);
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  color: var(--gh-blue-light);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Deck Switcher Dropdown in Top HUD */
+.deck-switcher {
+  position: relative;
+  display: inline-block;
+}
+
+.deck-select-btn {
+  background: var(--gh-card);
+  border: 1px solid var(--gh-border);
+  color: var(--gh-text);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.2s;
+}
+
+.deck-select-btn:hover {
+  border-color: var(--gh-blue);
+}
+
+.deck-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 6px;
+  background: var(--gh-card);
+  border: 1px solid var(--gh-border);
+  border-radius: 8px;
+  min-width: 250px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  z-index: 150;
+  overflow: hidden;
+}
+
+.deck-dropdown-menu.show {
+  display: block;
+}
+
+.deck-dropdown-item {
+  display: block;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--gh-text) !important;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gh-border-subtle);
+  transition: background 0.15s;
+}
+
+.deck-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.deck-dropdown-item:hover {
+  background: #21262d;
+  color: var(--gh-blue-light) !important;
+}
+
+.deck-dropdown-item.active {
+  background: rgba(137, 87, 229, 0.2);
+  font-weight: 600;
+  border-left: 3px solid var(--gh-purple);
+}
+
+/* Live Timer */
+.live-timer {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  padding: 3px 8px;
+  background: var(--gh-card);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  color: var(--gh-text);
+  font-size: 12px;
+}
+
+/* Floating Navigation Controls */
+.deck-controls {
+  position: fixed;
+  bottom: 16px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+  background: rgba(22, 27, 34, 0.88);
+  backdrop-filter: blur(8px);
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--gh-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.deck-btn {
+  background: #21262d;
+  border: 1px solid var(--gh-border);
+  color: var(--gh-text);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.deck-btn:hover {
+  background: #30363d;
+  border-color: var(--gh-muted);
+  color: #fff;
+}
+
+.deck-btn.primary {
+  background: #238636;
+  border-color: rgba(240, 246, 252, 0.1);
+  color: #fff;
+}
+.deck-btn.primary:hover {
+  background: #2ea043;
+}
+
+/* Speaker Notes In-Slide Overlay */
+.notes-overlay {
+  display: none;
+  position: fixed;
+  bottom: 64px;
+  right: 20px;
+  width: 450px;
+  max-height: 400px;
+  background: rgba(13, 17, 23, 0.96);
+  border: 1px solid var(--gh-purple);
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.7), 0 0 20px var(--gh-purple-glow);
+  backdrop-filter: blur(12px);
+  z-index: 99;
+  padding: 16px;
+  overflow-y: auto;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.notes-overlay.active {
+  display: block;
+}
+
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--gh-border);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  color: var(--gh-purple-light);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* Grids & Cards */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  text-align: left;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  text-align: left;
+}
+
+.card {
+  background: var(--gh-card);
+  border: 1px solid var(--gh-border);
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+  border-color: var(--gh-muted);
+  transform: translateY(-2px);
+}
+
+.card.purple { border-left: 4px solid var(--gh-purple); }
+.card.blue { border-left: 4px solid var(--gh-blue); }
+.card.green { border-left: 4px solid var(--gh-green); }
+.card.coral { border-left: 4px solid var(--gh-coral); }
+
+.card-title {
+  font-size: 0.85em;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.card-body {
+  font-size: 0.65em;
+  color: var(--gh-muted);
+  line-height: 1.55;
+}
+
+.card-body strong {
+  color: var(--gh-text);
+}
+
+.card-body ul {
+  margin: 8px 0 0 16px;
+  padding: 0;
+}
+
+.card-body li {
+  margin-bottom: 6px;
+}
+
+/* Metrics */
+.metric-box {
+  background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+  border: 1px solid var(--gh-border);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 2.2em;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.metric-value.purple { color: var(--gh-purple-light); }
+.metric-value.blue { color: var(--gh-blue-light); }
+.metric-value.green { color: var(--gh-green-light); }
+
+.metric-label {
+  font-size: 0.55em;
+  color: var(--gh-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Shift Box */
+.paradigm-shift {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #161b22;
+  border: 1px solid var(--gh-border);
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin-bottom: 14px;
+  font-size: 0.7em;
+}
+
+.paradigm-old {
+  color: var(--gh-muted);
+  text-decoration: line-through;
+  flex: 1;
+}
+
+.arrow-icon {
+  color: var(--gh-blue);
+  padding: 0 16px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.paradigm-new {
+  color: var(--gh-green-light);
+  font-weight: 600;
+  flex: 1;
+  text-align: right;
+}
+
+/* Speaker Pills */
+.speaker-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 14px;
+  font-size: 0.55em;
+  background: #21262d;
+  color: #c9d1d9;
+  border: 1px solid var(--gh-border);
+  margin-bottom: 12px;
+}
+
+.speaker-pill .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gh-blue);
+}
+
+/* Architectural Takeaways List */
+.arch-takeaway-item {
+  display: flex;
+  gap: 16px;
+  background: var(--gh-card);
+  border: 1px solid var(--gh-border);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.takeaway-number {
+  background: var(--gh-purple);
+  color: white;
+  font-size: 0.65em;
+  font-weight: bold;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.takeaway-content {
+  font-size: 0.65em;
+  line-height: 1.45;
+}
+
+.takeaway-content h4 {
+  font-size: 1.1em;
+  margin: 0 0 4px 0;
+  color: #fff;
+}
+
+.takeaway-content p {
+  margin: 0;
+  color: var(--gh-muted);
+}
+
+/* Keyboard Hints */
+.key-hints {
+  position: fixed;
+  bottom: 16px;
+  left: 20px;
+  font-size: 11px;
+  color: #484f58;
+  display: flex;
+  gap: 12px;
+  z-index: 90;
+}
+
+.key-hints kbd {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: inherit;
+  color: #8b949e;
+}

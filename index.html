@@ -2,972 +2,355 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>GitHub Universe 2026 Keynote: Architectural Debrief</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Universe 2026: Architecture Presentation Series</title>
   
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2358a6ff'><path d='M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'/></svg>">
 
-  <!-- Reveal.js styles -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
-  <!-- Highlight.js theme -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="assets/css/deck-theme.css">
 
   <style>
-    :root {
-      --gh-bg: #0d1117;
-      --gh-canvas: #010409;
-      --gh-card: #161b22;
-      --gh-border: #30363d;
-      --gh-purple: #8957e5;
-      --gh-purple-glow: rgba(137, 87, 229, 0.25);
-      --gh-blue: #58a6ff;
-      --gh-blue-glow: rgba(88, 166, 255, 0.25);
-      --gh-green: #3fb950;
-      --gh-coral: #f78166;
-      --gh-text: #e6edf3;
-      --gh-muted: #8b949e;
-      --gh-accent-gradient: linear-gradient(135deg, #a371f7 0%, #58a6ff 50%, #2ea043 100%);
-    }
-
     body {
-      background-color: var(--gh-canvas);
-      color: var(--gh-text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
-      overflow: hidden;
-    }
-
-    .reveal {
-      font-size: 26px;
-      color: var(--gh-text);
-    }
-
-    /* Ambient Universe Background Glow */
-    .universe-glow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      background: 
-        radial-gradient(circle at 15% 20%, rgba(137, 87, 229, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(88, 166, 255, 0.1) 0%, transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(1, 4, 9, 0.95) 0%, var(--gh-canvas) 100%);
-    }
-
-    /* Top HUD Header */
-    .top-hud {
-      position: fixed;
-      top: 14px;
-      left: 20px;
-      right: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-      pointer-events: auto;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      color: var(--gh-muted);
-    }
-
-    .top-hud a {
-      color: var(--gh-blue);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s;
-    }
-
-    .top-hud a:hover {
-      color: #79c0ff;
-    }
-
-    .badge-universe {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      background: rgba(137, 87, 229, 0.15);
-      border: 1px solid rgba(137, 87, 229, 0.4);
-      color: #d2a8ff;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
-    .live-timer {
-      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-      padding: 3px 8px;
-      background: var(--gh-card);
-      border: 1px solid var(--gh-border);
-      border-radius: 6px;
-      color: var(--gh-text);
-    }
-
-    /* Floating Navigation Controls */
-    .deck-controls {
-      position: fixed;
-      bottom: 16px;
-      right: 20px;
-      display: flex;
-      gap: 8px;
-      z-index: 100;
-      background: rgba(22, 27, 34, 0.85);
-      backdrop-filter: blur(8px);
-      padding: 6px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--gh-border);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    }
-
-    .deck-btn {
-      background: #21262d;
-      border: 1px solid var(--gh-border);
-      color: var(--gh-text);
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.2s;
-    }
-
-    .deck-btn:hover {
-      background: #30363d;
-      border-color: var(--gh-muted);
-      color: #fff;
-    }
-
-    .deck-btn.primary {
-      background: #238636;
-      border-color: rgba(240, 246, 252, 0.1);
-      color: #fff;
-    }
-    .deck-btn.primary:hover {
-      background: #2ea043;
-    }
-
-    /* Speaker Notes Modal for in-slide presentation */
-    .notes-overlay {
-      display: none;
-      position: fixed;
-      bottom: 64px;
-      right: 20px;
-      width: 440px;
-      max-height: 380px;
-      background: rgba(13, 17, 23, 0.95);
-      border: 1px solid var(--gh-purple);
-      border-radius: 12px;
-      box-shadow: 0 12px 36px rgba(0,0,0,0.7), 0 0 20px var(--gh-purple-glow);
-      backdrop-filter: blur(12px);
-      z-index: 99;
-      padding: 16px;
       overflow-y: auto;
-      text-align: left;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .notes-overlay.active {
-      display: block;
-    }
-
-    .notes-header {
+      min-height: 100vh;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--gh-border);
-      padding-bottom: 8px;
-      margin-bottom: 10px;
-      color: #d2a8ff;
-      font-weight: 600;
-      font-size: 13px;
+      flex-direction: column;
     }
 
-    /* Typography & Custom Slide Elements */
-    .reveal h1, .reveal h2, .reveal h3 {
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-      text-transform: none;
+    .hub-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 50px 24px 80px 24px;
+      position: relative;
+      z-index: 10;
+      flex: 1;
     }
 
-    .reveal h1 {
-      font-size: 2.2em;
-      margin-bottom: 0.2em;
+    .hub-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hub-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 12px 0 10px 0;
       background: var(--gh-accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      line-height: 1.15;
     }
 
-    .reveal h2 {
-      font-size: 1.6em;
-      margin-bottom: 0.4em;
-    }
-
-    .slide-subtitle {
+    .hub-subtitle {
+      font-size: 1.2rem;
       color: var(--gh-muted);
-      font-size: 0.9em;
-      margin-bottom: 1.2em;
-      font-weight: 400;
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.5;
     }
 
-    /* Cards & Grids */
-    .grid-2 {
+    .hub-segments-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      text-align: left;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 50px;
     }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
-      text-align: left;
-    }
-
-    .card {
+    .segment-card {
       background: var(--gh-card);
       border: 1px solid var(--gh-border);
-      border-radius: 10px;
-      padding: 20px;
-      position: relative;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .card:hover {
-      border-color: var(--gh-muted);
-      transform: translateY(-2px);
-    }
-
-    .card.purple { border-left: 4px solid var(--gh-purple); }
-    .card.blue { border-left: 4px solid var(--gh-blue); }
-    .card.green { border-left: 4px solid var(--gh-green); }
-    .card.coral { border-left: 4px solid var(--gh-coral); }
-
-    .card-title {
-      font-size: 0.85em;
-      font-weight: 700;
-      color: #fff;
+      border-radius: 14px;
+      padding: 26px;
       display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+
+    .segment-card:hover {
+      transform: translateY(-4px);
+      border-color: #58a6ff88;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .segment-card.featured {
+      border-color: var(--gh-purple);
+      box-shadow: 0 0 25px rgba(137, 87, 229, 0.15);
+    }
+
+    .segment-badge-row {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 16px;
     }
 
-    .card-body {
-      font-size: 0.65em;
+    .segment-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
       color: var(--gh-muted);
-      line-height: 1.55;
     }
 
-    .card-body strong {
+    .segment-duration {
+      font-family: ui-monospace, monospace;
+      font-size: 0.8rem;
+      background: #21262d;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--gh-border);
       color: var(--gh-text);
     }
 
-    .card-body ul {
-      margin: 8px 0 0 16px;
+    .segment-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 10px 0;
+      line-height: 1.3;
+    }
+
+    .segment-description {
+      font-size: 0.9rem;
+      color: var(--gh-muted);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .segment-topics {
+      list-style: none;
       padding: 0;
+      margin: 0 0 24px 0;
+      font-size: 0.82rem;
+      color: #c9d1d9;
     }
 
-    .card-body li {
-      margin-bottom: 6px;
-    }
-
-    /* Key Metrics */
-    .metric-box {
-      background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
-      border: 1px solid var(--gh-border);
-      border-radius: 10px;
-      padding: 16px;
-      text-align: center;
-    }
-
-    .metric-value {
-      font-size: 2.2em;
-      font-weight: 800;
-      font-family: ui-monospace, SFMono-Regular, monospace;
-      line-height: 1.1;
-      margin-bottom: 4px;
-    }
-
-    .metric-value.purple { color: #d2a8ff; }
-    .metric-value.blue { color: #79c0ff; }
-    .metric-value.green { color: #56d364; }
-
-    .metric-label {
-      font-size: 0.55em;
-      color: var(--gh-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* Architecture Comparison Pill */
-    .paradigm-shift {
+    .segment-topics li {
+      margin-bottom: 7px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #161b22;
-      border: 1px solid var(--gh-border);
-      border-radius: 8px;
-      padding: 12px 18px;
-      margin-bottom: 14px;
-      font-size: 0.7em;
+      align-items: flex-start;
+      gap: 8px;
     }
 
-    .paradigm-old {
-      color: var(--gh-muted);
-      text-decoration: line-through;
-      flex: 1;
-    }
-
-    .arrow-icon {
+    .segment-topics li::before {
+      content: "•";
       color: var(--gh-blue);
-      padding: 0 16px;
       font-weight: bold;
-      font-size: 1.2em;
     }
 
-    .paradigm-new {
-      color: #56d364;
-      font-weight: 600;
-      flex: 1;
-      text-align: right;
-    }
-
-    /* Speaker Pill / Credential */
-    .speaker-pill {
+    .btn-launch {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 3px 8px;
-      border-radius: 14px;
-      font-size: 0.55em;
-      background: #21262d;
-      color: #c9d1d9;
-      border: 1px solid var(--gh-border);
-      margin-bottom: 12px;
-    }
-
-    .speaker-pill .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--gh-blue);
-    }
-
-    /* Architectural Takeaways List */
-    .arch-takeaway-item {
-      display: flex;
-      gap: 16px;
-      background: var(--gh-card);
-      border: 1px solid var(--gh-border);
-      border-radius: 8px;
-      padding: 14px 18px;
-      margin-bottom: 12px;
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .takeaway-number {
-      background: var(--gh-purple);
-      color: white;
-      font-size: 0.65em;
-      font-weight: bold;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 18px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-sizing: border-box;
     }
 
-    .takeaway-content {
-      font-size: 0.65em;
-      line-height: 1.45;
-    }
-
-    .takeaway-content h4 {
-      font-size: 1.1em;
-      margin: 0 0 4px 0;
+    .btn-launch.primary {
+      background: #238636;
+      border: 1px solid rgba(240, 246, 252, 0.1);
       color: #fff;
     }
 
-    .takeaway-content p {
+    .btn-launch.primary:hover {
+      background: #2ea043;
+    }
+
+    .btn-launch.secondary {
+      background: #21262d;
+      border: 1px solid var(--gh-border);
+      color: var(--gh-text);
+    }
+
+    .btn-launch.secondary:hover {
+      background: #30363d;
+      color: #fff;
+      border-color: var(--gh-muted);
+    }
+
+    /* Pacing Guide Table */
+    .hub-guide-card {
+      background: var(--gh-card);
+      border: 1px solid var(--gh-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 30px;
+    }
+
+    .guide-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      font-size: 0.85rem;
+    }
+
+    .guide-item {
+      background: #0d1117;
+      border: 1px solid var(--gh-border-subtle);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .guide-item strong {
+      display: block;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .guide-item p {
       margin: 0;
       color: var(--gh-muted);
+      font-size: 0.8rem;
     }
 
-    /* Footer hints */
-    .key-hints {
-      position: fixed;
-      bottom: 16px;
-      left: 20px;
-      font-size: 11px;
-      color: #484f58;
-      display: flex;
-      gap: 12px;
-      z-index: 90;
-    }
-
-    .key-hints kbd {
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 4px;
-      padding: 2px 5px;
-      font-family: inherit;
-      color: #8b949e;
+    .hub-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.82rem;
+      color: var(--gh-muted);
+      border-top: 1px solid var(--gh-border-subtle);
     }
   </style>
 </head>
 <body>
-  <!-- Ambient Space Background Glow -->
   <div class="universe-glow"></div>
 
-  <!-- Top HUD Header -->
-  <div class="top-hud">
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <span class="badge-universe">GitHub Universe 2026</span>
-      <span>Opening Keynote Architecture Debrief</span>
+  <div class="hub-container">
+    <div class="hub-header">
+      <div style="margin-bottom: 12px;">
+        <span class="badge-universe">GitHub Universe 2026 • Architecture Series</span>
+      </div>
+      <h1 class="hub-title">The Agentic Software Delivery System</h1>
+      <p class="hub-subtitle">
+        Modular slide decks designed for an architecture team debrief. 
+        Present each segment independently or navigate across them seamlessly using the top HUD.
+      </p>
     </div>
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <span class="live-timer" id="presentationTimer" title="Presentation Time">00:00</span>
-      <a href="https://www.youtube.com/watch?v=AArI948SDz8" target="_blank" rel="noopener">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        Watch Keynote
-      </a>
+
+    <!-- Segments Grid -->
+    <div class="hub-segments-grid">
+
+      <!-- SEGMENT 1: Keynote Debrief -->
+      <div class="segment-card featured">
+        <div>
+          <div class="segment-badge-row">
+            <span class="segment-number" style="color: var(--gh-purple-light);">Segment 1 • Opening Talk</span>
+            <span class="segment-duration">⏱️ 3–5 Mins</span>
+          </div>
+          <h2 class="segment-title">Keynote Debrief</h2>
+          <p class="segment-description">
+            The opening minutes of your talk. Covers the high-level macro shift from Jay Parikh, key Octoverse milestones, Copilot Fusion, and core announcements.
+          </p>
+          <ul class="segment-topics">
+            <li><strong>225M Developers &amp; &gt;40% Agent PRs:</strong> The new engineering bottleneck.</li>
+            <li><strong>Copilot Fusion:</strong> Dynamic model routing across Claude, GPT-4o, and Gemini.</li>
+            <li><strong>Projects &amp; Cloud Continuity:</strong> Burke Holland &amp; Damian Brady demos.</li>
+            <li><strong>4 Architectural Takeaways:</strong> Immediate high-level action items.</li>
+          </ul>
+        </div>
+        <a href="presentations/01-keynote-debrief/" class="btn-launch primary">
+          Launch Segment 1 Deck ›
+        </a>
+      </div>
+
+      <!-- SEGMENT 2: Agentic Architecture & Multi-Repo -->
+      <div class="segment-card">
+        <div>
+          <div class="segment-badge-row">
+            <span class="segment-number" style="color: var(--gh-blue-light);">Segment 2 • System Design</span>
+            <span class="segment-duration">⏱️ 10–12 Mins</span>
+          </div>
+          <h2 class="segment-title">Agentic Architecture &amp; Multi-Repo</h2>
+          <p class="segment-description">
+            A technical deep dive into orchestrating multi-repository agent fleets, contract-first APIs, and ephemeral cloud sandboxes.
+          </p>
+          <ul class="segment-topics">
+            <li><strong>Copilot Fusion Pipeline:</strong> AST context, decomposition, and model tiers.</li>
+            <li><strong>Multi-Repo PR Chains:</strong> Coordinating contracts, backends, and clients.</li>
+            <li><strong>Contract-First Mandate:</strong> Why OpenAPI &amp; Protobuf prevent hallucination.</li>
+            <li><strong>Ephemeral Execution Sandboxes:</strong> Eliminating local workstation drift.</li>
+          </ul>
+        </div>
+        <a href="presentations/02-agentic-architecture/" class="btn-launch secondary">
+          Launch Segment 2 Deck ›
+        </a>
+      </div>
+
+      <!-- SEGMENT 3: Platform Scale & Governance -->
+      <div class="segment-card">
+        <div>
+          <div class="segment-badge-row">
+            <span class="segment-number" style="color: var(--gh-green-light);">Segment 3 • DevOps & Security</span>
+            <span class="segment-duration">⏱️ 8–10 Mins</span>
+          </div>
+          <h2 class="segment-title">Platform Scale &amp; Governance</h2>
+          <p class="segment-description">
+            Examining how Git was re-engineered for agent write scale, zero-trust Actions lockfiles, multi-cloud runners, and PR blast-radius policies.
+          </p>
+          <ul class="segment-topics">
+            <li><strong>Rebuilding Git:</strong> Lockless ref updates and delta compression for agent throughput.</li>
+            <li><strong>Actions Workflow Lockfiles:</strong> Cryptographic SHA pinning for supply chain defense.</li>
+            <li><strong>Multi-Cloud Compute:</strong> Native runner jobs inside customer AWS/Azure VPCs.</li>
+            <li><strong>Blast-Radius Governance:</strong> Agent auto-merges vs. mandatory architect gates.</li>
+          </ul>
+        </div>
+        <a href="presentations/03-devops-governance/" class="btn-launch secondary">
+          Launch Segment 3 Deck ›
+        </a>
+      </div>
+
     </div>
-  </div>
 
-  <!-- On-Screen Navigation Controls -->
-  <div class="deck-controls">
-    <button class="deck-btn" onclick="toggleNotesOverlay()" title="Toggle Speaker Notes [S]">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      Notes
-    </button>
-    <button class="deck-btn" onclick="Reveal.prev()" title="Previous Slide [←]">‹ Prev</button>
-    <button class="deck-btn primary" onclick="Reveal.next()" title="Next Slide [→]">Next ›</button>
-    <button class="deck-btn" onclick="Reveal.toggleOverview()" title="Slide Overview [Esc / O]">Overview</button>
-    <button class="deck-btn" onclick="toggleFullScreen()" title="Fullscreen [F]">⛶</button>
-  </div>
-
-  <!-- In-Slide Notes Modal -->
-  <div class="notes-overlay" id="notesOverlay">
-    <div class="notes-header">
-      <span>🎙️ SPEAKER TALKING POINTS (3-5 MINS)</span>
-      <span style="cursor: pointer; color: var(--gh-muted);" onclick="toggleNotesOverlay()">✕</span>
-    </div>
-    <div id="notesContent">Loading talking points...</div>
-  </div>
-
-  <!-- Keyboard Shortcuts Hint -->
-  <div class="key-hints">
-    <span>Navigate: <kbd>→</kbd> <kbd>Space</kbd></span>
-    <span>Overview: <kbd>Esc</kbd></span>
-    <span>Speaker View: <kbd>S</kbd></span>
-    <span>Fullscreen: <kbd>F</kbd></span>
-  </div>
-
-  <!-- Presentation Slides -->
-  <div class="reveal">
-    <div class="slides">
-
-      <!-- SLIDE 1: Title & Hook -->
-      <section data-state="slide-1">
-        <div style="margin-bottom: 15px;">
-          <span class="badge-universe">Oct 28–29, 2026 • Fort Mason Center, SF</span>
+    <!-- Presenter Pacing & Keyboard Controls Guide -->
+    <div class="hub-guide-card">
+      <h3 class="guide-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Presenter Guide &amp; Keyboard Controls
+      </h3>
+      <div class="guide-grid">
+        <div class="guide-item">
+          <strong><kbd>S</kbd> Dual Speaker View</strong>
+          <p>Launches official presenter window with live slide notes, upcoming previews, and timer.</p>
         </div>
-        <h1>GitHub Universe 2026</h1>
-        <h2 style="font-size: 1.25em; color: #a5d6ff; margin-bottom: 8px;">Keynote Debrief & Architecture Implications</h2>
-        <p class="slide-subtitle">The Transition into the Agentic Software Delivery System</p>
-        
-        <div style="display: inline-flex; gap: 14px; margin-top: 20px; font-size: 0.6em; color: var(--gh-muted);">
-          <span>Keynote Speakers: <strong>Jay Parikh</strong> • <strong>Cassidy Williams</strong> • <strong>Burke Holland</strong> • <strong>Damian Brady</strong> • <strong>April Leonard</strong></span>
+        <div class="guide-item">
+          <strong><kbd>N</kbd> In-Slide Notes HUD</strong>
+          <p>Toggles slide talking points directly on screen in a dark glass HUD (single monitor friendly).</p>
         </div>
-
-        <div style="margin-top: 35px;">
-          <button class="deck-btn primary" style="padding: 10px 24px; font-size: 14px; margin: 0 auto;" onclick="Reveal.next()">
-            Start Keynote Tour ›
-          </button>
+        <div class="guide-item">
+          <strong><kbd>Esc</kbd> Slide Matrix</strong>
+          <p>Zooms out to bird's-eye slide overview for jumping directly to any topic during Q&amp;A.</p>
         </div>
-
-        <aside class="notes">
-          Good morning architecture team! Last week I attended GitHub Universe 2026 in San Francisco. 
-          The opening keynote signaled the most decisive architectural inflection point our industry has seen in a decade: 
-          we are officially moving past the era of AI as a simple 'code autocomplete assistant' into what GitHub calls an 
-          'Agentic Software Delivery System'. Over the next 4 minutes, I want to debrief you on the 5 core announcements 
-          from Jay Parikh, Cassidy Williams, Burke Holland, and April Leonard, and connect the dots directly to our architectural roadmap.
-        </aside>
-      </section>
-
-      <!-- SLIDE 2: The Macro Shift (Octoverse 2026) -->
-      <section>
-        <h2>The Paradigm Shift</h2>
-        <p class="slide-subtitle">From "In-line Copilot" to "Autonomous Agent Fleet"</p>
-
-        <div class="grid-3" style="margin-bottom: 24px;">
-          <div class="metric-box">
-            <div class="metric-value purple">225M+</div>
-            <div class="metric-label">Global Developers on GitHub</div>
-          </div>
-          <div class="metric-box">
-            <div class="metric-value blue">&gt; 40%</div>
-            <div class="metric-label">PRs Originating from AI Agents</div>
-          </div>
-          <div class="metric-box">
-            <div class="metric-value green">10x</div>
-            <div class="metric-label">Write Throughput Shift</div>
-          </div>
+        <div class="guide-item">
+          <strong>⏱️ Live Pacing Stopwatch</strong>
+          <p>Top HUD stopwatch color-alerts when approaching segment time limits.</p>
         </div>
-
-        <div class="paradigm-shift">
-          <div class="paradigm-old">Single-file Tab Autocomplete</div>
-          <div class="arrow-icon">➔</div>
-          <div class="paradigm-new">Multi-Agent Task Orchestration</div>
-        </div>
-
-        <div class="paradigm-shift">
-          <div class="paradigm-old">Developer Machine-Coupled Builds</div>
-          <div class="arrow-icon">➔</div>
-          <div class="paradigm-new">Ephemeral Cloud Sandboxes & Sessions</div>
-        </div>
-
-        <div class="paradigm-shift">
-          <div class="paradigm-old">Static Per-Seat AI Licenses</div>
-          <div class="arrow-icon">➔</div>
-          <div class="paradigm-new">Consumption Compute Pools & Credit Routing</div>
-        </div>
-
-        <aside class="notes">
-          Jay Parikh opened the keynote with metrics from Octoverse 2026 that should reshape how we design our developer platform. 
-          There are now 225 million developers on GitHub, and more than 40 percent of all pull requests created today start with an AI agent's draft.
-          Let's absorb that: the bottleneck in our engineering organization is no longer typing velocity or syntax generation. 
-          The bottleneck is architectural boundaries, verification throughput, and automated governance. 
-          We are no longer building for developers sitting in an IDE typing code line-by-line; we are architecting environments where human engineers guide and govern fleets of autonomous agents.
-        </aside>
-      </section>
-
-      <!-- SLIDE 3: Copilot Fusion -->
-      <section>
-        <span class="speaker-pill"><span class="dot"></span> Jay Parikh & Product Keynote</span>
-        <h2>Copilot Fusion</h2>
-        <p class="slide-subtitle">Intelligent Dynamic Multi-Model Routing</p>
-
-        <div class="grid-2">
-          <div class="card purple">
-            <div class="card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d2a8ff" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              Dynamic Model Selection
-            </div>
-            <div class="card-body">
-              <ul>
-                <li><strong>No Single-Model Lock-in:</strong> Intelligently routes individual sub-tasks across Claude 3.5/3.7, GPT-4o/o1, Gemini, and specialized domain models.</li>
-                <li><strong>Task-Specific Optimization:</strong> Cheap/fast models handle syntax, formatting, and unit test scaffolding.</li>
-                <li><strong>Deep Reasoning:</strong> Frontier reasoning models engage dynamically for cross-repo refactors and architectural diff analysis.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card blue">
-            <div class="card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#79c0ff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              Architectural Takeaway
-            </div>
-            <div class="card-body">
-              <ul>
-                <li><strong>Decoupled Inference Layer:</strong> System architectures must treat LLMs as interchangeable, dynamic compute primitives rather than rigid dependencies.</li>
-                <li><strong>Cost & Latency Arbitrage:</strong> Orchestrators optimize budget caps while maintaining sub-second feedback for simple tasks and asynchronous deep planning for complex jobs.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          The first major technical announcement was Copilot Fusion, now entering General Availability. 
-          In the past, Copilot meant one vendor model. Fusion introduces an intelligent routing layer. 
-          When an agent takes on a task, Fusion dynamically routes each phase of work: fast, economical models for boilerplate and test templates, 
-          and advanced frontier reasoning models like Claude and OpenAI o-series for complex refactoring and dependency analysis. 
-          For our architecture team, this validates our decoupling strategy: we must never hardcode an application or CI pipeline to a single LLM API. 
-          Our internal tools must adopt model-routing architectures.
-        </aside>
-      </section>
-
-      <!-- SLIDE 4: Multi-Repo & Copilot Projects -->
-      <section>
-        <span class="speaker-pill"><span class="dot"></span> Cassidy Williams & Burke Holland Demos</span>
-        <h2>Copilot Projects & Canvases</h2>
-        <p class="slide-subtitle">Breaking the Single-Repository Barrier</p>
-
-        <div class="grid-2">
-          <div class="card blue">
-            <div class="card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#79c0ff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-              Multi-Repo Orchestration
-            </div>
-            <div class="card-body">
-              <ul>
-                <li><strong>Cross-Repository Awareness:</strong> Public preview of <em>Copilot Projects</em> coordinates tasks spanning microservices, client apps, and shared schemas.</li>
-                <li><strong>Synchronized PR Chains:</strong> Agent generates coordinated pull requests across downstream consumer repos and upstream service contracts.</li>
-                <li><strong>Visual Canvas Planning:</strong> Ingests Figma/UI mockups, design tokens, and markdown specs directly into the agent planning loop.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card purple">
-            <div class="card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d2a8ff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 14.14 14.14"/></svg>
-              The Architecture Challenge
-            </div>
-            <div class="card-body">
-              <ul>
-                <li><strong>Contract Rigor:</strong> Multi-repo agents fail when API boundaries are implicit or poorly typed.</li>
-                <li><strong>Schema-First Mandate:</strong> Machine-readable OpenAPI, Protobuf, and TypeScript declarations are now prerequisites for agent velocity.</li>
-                <li><strong>Distributed Dependency Tracking:</strong> Need centralized artifact registries and semantic versioning enforcement.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          Next, Cassidy Williams and Burke Holland demonstrated Copilot Projects and the new Canvases UI. 
-          Historically, AI assistants suffered from severe amnesia at repository boundaries. 
-          Burke demonstrated an agent that took a single high-level spec and a design mockup, and synchronized changes across three separate repositories: 
-          updating an API schema, modifying a backend microservice, and updating the frontend consumer in one coherent transaction. 
-          Here's our takeaway: agents can only coordinate across multiple repositories if our interface contracts are explicit, strictly typed, and machine-readable. 
-          Schema-first design is no longer just documentation hygiene—it's the fuel for agent orchestration.
-        </aside>
-      </section>
-
-      <!-- SLIDE 5: Cross-Surface Continuity -->
-      <section>
-        <span class="speaker-pill"><span class="dot"></span> Damian Brady Live Demo</span>
-        <h2>Cross-Surface Continuity</h2>
-        <p class="slide-subtitle">Cloud Sandboxes & Mobile-to-IDE Seamless Handoff</p>
-
-        <div class="card green" style="margin-bottom: 20px; text-align: left;">
-          <div class="card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56d364" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-            Live Scenario: Café Order Incident Triage
-          </div>
-          <div class="card-body">
-            Damian received a production incident alert on his phone while off-site. 
-            He initiated an autonomous Copilot fix directly from the GitHub Mobile app. 
-            The agent spun up an isolated cloud execution sandbox, reproduced the bug against live integration mocks, wrote the fix, and passed test suites. 
-            When Damian opened his laptop, he seamlessly resumed the exact cloud session in VS Code without re-running builds or losing terminal state.
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-title">Cloud Execution Sandboxes</div>
-            <div class="card-body">
-              Agents execute in ephemeral, sandboxed cloud containers. Local machine setup drift is eliminated; tests run in authenticated runtime clones.
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-title">Stateful Continuity</div>
-            <div class="card-body">
-              Chat context, diff buffers, reproduction logs, and terminal sessions persist in the cloud, accessible across Web, Mobile, CLI, and IDE.
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          Damian Brady delivered one of the most talked-about demos. 
-          He received an incident alert on his mobile phone for a café ordering service that stopped taking orders. 
-          Right from his phone, he triggered a Copilot investigation. 
-          Copilot spun up an isolated cloud sandbox, ran the test suite, reproduced the bug, and generated a candidate patch. 
-          When Damian returned to his workstation, he opened VS Code and the entire session—terminal logs, diff state, and running sandbox—was waiting for him. 
-          This proves the shift away from local developer machines. 
-          Our architecture should prioritize standardized cloud development environments and ephemeral sandboxes for automated workflows.
-        </aside>
-      </section>
-
-      <!-- SLIDE 6: Rebuilding Git & Core Infrastructure -->
-      <section>
-        <span class="speaker-pill"><span class="dot"></span> April Leonard Infrastructure Keynote</span>
-        <h2>Rebuilding Git for Agent Scale</h2>
-        <p class="slide-subtitle">Underlying Infrastructure & DevOps Modernization</p>
-
-        <div class="grid-3">
-          <div class="card coral">
-            <div class="card-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f78166" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              Git Core Re-Engineering
-            </div>
-            <div class="card-body">
-              GitHub rebuilt core parts of the Git storage and write pipelines to handle massive spikes in automated agent commits, branching, and ref-updates without lock contention.
-            </div>
-          </div>
-
-          <div class="card blue">
-            <div class="card-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#79c0ff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Actions Workflow Lockfiles
-            </div>
-            <div class="card-body">
-              Pinning action dependencies cryptographically with immutable lockfiles, backed by organization-wide policies to prevent CI/CD supply-chain poisoning.
-            </div>
-          </div>
-
-          <div class="card purple">
-            <div class="card-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d2a8ff" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
-              Multi-Cloud Compute
-            </div>
-            <div class="card-body">
-              Native GitHub Actions compute allowing Linux workloads to execute directly inside customer VPCs (AWS, Azure) with a unified dollar-credit pool.
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          April Leonard provided the engineering reality check. 
-          When hundreds of millions of developers unleash fleets of AI agents, Git's traditional object storage model faces write lock contention at unprecedented scale. 
-          GitHub literally re-engineered parts of the core Git write and ref pipeline to withstand this order-of-magnitude increase in automated commits. 
-          On the DevOps side, they introduced two massive features: 
-          First, Actions Workflow Lockfiles, which lock third-party actions to immutable hashes—eliminating a major supply chain attack vector. 
-          Second, Multi-Cloud Compute runners, allowing eligible Linux jobs to execute in our own AWS and cloud VPCs under a single consolidated credit billing model.
-        </aside>
-      </section>
-
-      <!-- SLIDE 7: Autonomous Quality & Governance -->
-      <section>
-        <h2>Quality, Merge & Governance</h2>
-        <p class="slide-subtitle">Guarding Architectural Integrity at Agent Speed</p>
-
-        <div class="grid-2">
-          <div class="card purple">
-            <div class="card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d2a8ff" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-              Copilot Code Review "Max"
-            </div>
-            <div class="card-body">
-              Multi-model adversarial code review. Deep static checks, security taint tracking, and architectural regression detection before human review.
-            </div>
-          </div>
-
-          <div class="card green">
-            <div class="card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56d364" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
-              Agent Merge & Auto-Conflict Fix
-            </div>
-            <div class="card-body">
-              Agents autonomously rebase branches, resolve semantic merge conflicts, and remediate broken CI test runs without requiring human context-switching.
-            </div>
-          </div>
-
-          <div class="card blue">
-            <div class="card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#79c0ff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              Path-Scoped Approvals
-            </div>
-            <div class="card-body">
-              Admins configure automated agent approval authority scoped strictly to safe paths (docs, generated client stubs), with hard gates on core domain logic.
-            </div>
-          </div>
-
-          <div class="card coral">
-            <div class="card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f78166" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              Dependabot Reachability Analysis
-            </div>
-            <div class="card-body">
-              Static call-graph analysis for JS/TS: determines if vulnerable dependency functions are actually invoked in production code, slashing alert noise by 70%+.
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          Now let's talk about the big question for our architecture team: if agents write 40% of code, how do we keep our codebase from turning into spaghetti? 
-          GitHub answered this with four critical governance features: 
-          First, Copilot Code Review 'Max'—a multi-model adversarial review system that critiques incoming code for performance, security, and design antipatterns. 
-          Second, Agent Merge—which autonomously rebases and fixes failing CI test runs. 
-          Third, Path-Scoped Approvals—which allows us to give agents authority to approve safe paths like schema generation, while strictly reserving human approval for architectural boundaries. 
-          And fourth, Dependabot Reachability Analysis—which eliminates security alert fatigue by verifying if vulnerable code paths are actually called.
-        </aside>
-      </section>
-
-      <!-- SLIDE 8: 4 Architectural Imperatives -->
-      <section>
-        <h2>4 Takeaways for Our Team</h2>
-        <p class="slide-subtitle">Translating Keynote Innovations into Our Architectural Roadmap</p>
-
-        <div class="arch-takeaway-item">
-          <div class="takeaway-number">1</div>
-          <div class="takeaway-content">
-            <h4>Strict Contract-First Architecture</h4>
-            <p>Treat OpenAPI, Protobuf, and GraphQL schemas as primary artifacts. Agents can orchestrate across our microservices only when interfaces are unambiguously defined and validated.</p>
-          </div>
-        </div>
-
-        <div class="arch-takeaway-item">
-          <div class="takeaway-number">2</div>
-          <div class="takeaway-content">
-            <h4>Standardize on Ephemeral Cloud Sandboxes</h4>
-            <p>Move away from brittle local developer setups. Invest in containerized cloud sandboxes so developers and agents can seamlessly share runtime execution state.</p>
-          </div>
-        </div>
-
-        <div class="arch-takeaway-item">
-          <div class="takeaway-number">3</div>
-          <div class="takeaway-content">
-            <h4>Harden CI/CD with Workflow Lockfiles & Scoped Merges</h4>
-            <p>Adopt GitHub Actions Workflow Lockfiles immediately. Define fine-grained CODEOWNERS rules granting agent merge authority on boilerplate while protecting core domain models.</p>
-          </div>
-        </div>
-
-        <div class="arch-takeaway-item">
-          <div class="takeaway-number">4</div>
-          <div class="takeaway-content">
-            <h4>Design Internal Tooling for Model Fusion</h4>
-            <p>Avoid single-model lock-in in our internal automation. Structure prompts, evaluation datasets, and orchestration layers to leverage dynamic model routing.</p>
-          </div>
-        </div>
-
-        <aside class="notes">
-          To wrap up my opening remarks, here are the 4 strategic initiatives I recommend for our architecture team this quarter:
-          Number 1: Contract-First Architecture. Let's make all service interfaces machine-readable so cross-repo agents can operate without friction.
-          Number 2: Standardize on Ephemeral Cloud Sandboxes. Local machine variance is our biggest drag on velocity.
-          Number 3: Supply chain hygiene and path-scoped governance. Let's roll out Actions Workflow Lockfiles and establish clear blast-radius boundaries for automated merges.
-          Number 4: Model abstraction. Ensure our internal developer tools are built with model routers like Fusion, rather than brittle single-model APIs.
-        </aside>
-      </section>
-
-      <!-- SLIDE 9: Q&A / Discussion Kickoff -->
-      <section>
-        <div style="margin-bottom: 20px;">
-          <span class="badge-universe">Architecture Team Working Session</span>
-        </div>
-        <h1 style="font-size: 2.1em;">Discussion & Roadmap</h1>
-        <p class="slide-subtitle">Where should we pilot agentic workflows first?</p>
-
-        <div class="grid-2" style="margin-top: 30px;">
-          <div class="card blue">
-            <div class="card-title">Key Questions to Tackle Today</div>
-            <div class="card-body">
-              <ul>
-                <li>Which microservices have the cleanest contracts for multi-repo agent pilots?</li>
-                <li>How can we adopt Agent Merge to eliminate our CI re-run bottlenecks?</li>
-                <li>What CODEOWNERS rules need adjustment for automated PR approvals?</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card purple">
-            <div class="card-title">Resources & Session Links</div>
-            <div class="card-body">
-              <ul>
-                <li><a href="https://www.youtube.com/watch?v=AArI948SDz8" target="_blank" style="color: #79c0ff;">Full Keynote Video (YouTube)</a></li>
-                <li><a href="https://github.blog" target="_blank" style="color: #79c0ff;">GitHub Universe Official Announcements</a></li>
-                <li><a href="https://github.com/gilberterik/github-universe-2026-review" target="_blank" style="color: #79c0ff;">Presentation GitHub Repository</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top: 30px; font-size: 0.6em; color: var(--gh-muted);">
-          Press <kbd style="background: #21262d; border: 1px solid #30363d; padding: 2px 6px; border-radius: 4px; color: #c9d1d9;">S</kbd> anytime for complete presenter notes and script.
-        </div>
-
-        <aside class="notes">
-          Thank you all for listening to this quick debrief. 
-          I wanted to ground our team in where GitHub and the industry are heading over the next 12 to 24 months. 
-          Now, let's open up the floor to our architecture team: how do we want to pilot these capabilities in our microservice stack, 
-          and what policies should we set in motion?
-        </aside>
-      </section>
-
+      </div>
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
-
-  <script>
-    // Initialize Reveal
-    Reveal.initialize({
-      width: 1200,
-      height: 720,
-      margin: 0.06,
-      minScale: 0.2,
-      maxScale: 2.0,
-      controls: false, // We use custom floating HUD controls
-      progress: true,
-      center: true,
-      hash: true,
-      history: true,
-      transition: 'slide',
-      transitionSpeed: 'fast',
-      backgroundTransition: 'fade',
-      plugins: [ RevealHighlight, RevealNotes ]
-    });
-
-    // Stopwatch Timer for 3-5 minute opening talk
-    let secondsElapsed = 0;
-    const timerElement = document.getElementById('presentationTimer');
-    setInterval(() => {
-      secondsElapsed++;
-      const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
-      const secs = String(secondsElapsed % 60).padStart(2, '0');
-      timerElement.textContent = `${mins}:${secs}`;
-      if (secondsElapsed >= 300) {
-        timerElement.style.color = '#f78166'; // Alert when past 5 mins
-      } else if (secondsElapsed >= 180) {
-        timerElement.style.color = '#d29922'; // Warning at 3 mins
-      }
-    }, 1000);
-
-    // Synchronize On-Screen Speaker Notes Overlay
-    function updateNotesOverlay() {
-      const currentSlide = Reveal.getCurrentSlide();
-      const notesEl = currentSlide.querySelector('aside.notes');
-      const targetEl = document.getElementById('notesContent');
-      if (notesEl && targetEl) {
-        targetEl.innerHTML = `<p>${notesEl.innerHTML.trim().replace(/\n\s*\n/g, '</p><p>')}</p>`;
-      } else if (targetEl) {
-        targetEl.innerHTML = '<p><em>No speaker notes for this slide.</em></p>';
-      }
-    }
-
-    Reveal.on('slidechanged', updateNotesOverlay);
-    Reveal.on('ready', updateNotesOverlay);
-
-    function toggleNotesOverlay() {
-      const overlay = document.getElementById('notesOverlay');
-      overlay.classList.toggle('active');
-    }
-
-    function toggleFullScreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
-      }
-    }
-
-    // Keyboard shortcut helper for 'S' to toggle overlay if popup blocked
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'n' || e.key === 'N') {
-        toggleNotesOverlay();
-      }
-    });
-  </script>
+  <footer class="hub-footer">
+    <span>GitHub Universe 2026 Keynote Architecture Review • Hosted on GitHub Pages</span>
+    <span style="margin: 0 10px;">•</span>
+    <a href="https://www.youtube.com/watch?v=AArI948SDz8" target="_blank" style="color: var(--gh-blue); text-decoration: none;">Watch Keynote on YouTube</a>
+  </footer>
 </body>
 </html>

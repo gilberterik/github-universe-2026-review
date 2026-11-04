@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Segment 1: Keynote Debrief - GitHub Universe 2026</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2358a6ff'><path d='M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'/></svg>">
+
+  <!-- Reveal.js styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+
+  <!-- Shared Theme -->
+  <link rel="stylesheet" href="../../assets/css/deck-theme.css">
+</head>
+<body>
+  <!-- Ambient Background Glow -->
+  <div class="universe-glow"></div>
+
+  <!-- Top HUD Header -->
+  <div class="top-hud">
+    <div class="hud-left">
+      <a href="../../" title="Back to Presentation Portal" style="font-weight: 600;">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>
+        Hub
+      </a>
+      <span class="badge-universe">Segment 1</span>
+
+      <!-- Presentation Segment Switcher Dropdown -->
+      <div class="deck-switcher">
+        <button class="deck-select-btn" onclick="toggleDeckMenu()">
+          <span>Debrief Keynote (3–5m)</span>
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z"/></svg>
+        </button>
+        <div class="deck-dropdown-menu" id="deckDropdownMenu"></div>
+      </div>
+    </div>
+
+    <div class="hud-right">
+      <span class="live-timer" id="presentationTimer" title="Presentation Time">00:00</span>
+      <a href="https://www.youtube.com/watch?v=AArI948SDz8" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Keynote Video
+      </a>
+    </div>
+  </div>
+
+  <!-- On-Screen Controls -->
+  <div class="deck-controls">
+    <button class="deck-btn" onclick="toggleNotesOverlay()" title="Toggle Speaker Notes [N]">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Notes
+    </button>
+    <button class="deck-btn" onclick="Reveal.prev()" title="Previous Slide [←]">‹ Prev</button>
+    <button class="deck-btn primary" onclick="Reveal.next()" title="Next Slide [→]">Next ›</button>
+    <button class="deck-btn" onclick="Reveal.toggleOverview()" title="Slide Overview [Esc / O]">Overview</button>
+    <button class="deck-btn" onclick="toggleFullScreen()" title="Fullscreen [F]">⛶</button>
+  </div>
+
+  <!-- In-Slide Notes Modal -->
+  <div class="notes-overlay" id="notesOverlay">
+    <div class="notes-header">
+      <span>🎙️ SPEAKER SCRIPT (SEGMENT 1 • 3–5 MINS)</span>
+      <span style="cursor: pointer; color: var(--gh-muted);" onclick="toggleNotesOverlay()">✕</span>
+    </div>
+    <div id="notesContent">Loading talking points...</div>
+  </div>
+
+  <!-- Keyboard Shortcuts Hint -->
+  <div class="key-hints">
+    <span>Navigate: <kbd>→</kbd> <kbd>Space</kbd></span>
+    <span>Overview: <kbd>Esc</kbd></span>
+    <span>Speaker View: <kbd>S</kbd></span>
+    <span>In-Slide Notes: <kbd>N</kbd></span>
+  </div>
+
+  <!-- Reveal Presentation Slides -->
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: Title -->
+      <section>
+        <div style="margin-bottom: 15px;">
+          <span class="badge-universe">Segment 1 • 3–5 Minute Opening Debrief</span>
+        </div>
+        <h1>GitHub Universe 2026</h1>
+        <h2 style="font-size: 1.25em; color: #a5d6ff; margin-bottom: 8px;">Keynote Debrief & Architecture Implications</h2>
+        <p class="slide-subtitle">The Transition into the Agentic Software Delivery System</p>
+        
+        <div style="display: inline-flex; gap: 14px; margin-top: 15px; font-size: 0.6em; color: var(--gh-muted);">
+          <span>Keynote Speakers: <strong>Jay Parikh</strong> • <strong>Cassidy Williams</strong> • <strong>Burke Holland</strong> • <strong>Damian Brady</strong> • <strong>April Leonard</strong></span>
+        </div>
+
+        <div style="margin-top: 30px;">
+          <button class="deck-btn primary" style="padding: 10px 24px; font-size: 14px; margin: 0 auto;" onclick="Reveal.next()">
+            Start Keynote Tour ›
+          </button>
+        </div>
+
+        <aside class="notes">
+          Good morning architecture team! Last week I attended GitHub Universe 2026 in San Francisco. 
+          The opening keynote signaled the most decisive architectural inflection point our industry has seen in a decade: 
+          we are officially moving past the era of AI as a simple 'code autocomplete assistant' into what GitHub calls an 
+          'Agentic Software Delivery System'. Over the next 4 minutes, I want to debrief you on the 5 core announcements 
+          from Jay Parikh, Cassidy Williams, Burke Holland, and April Leonard, and connect the dots directly to our architectural roadmap.
+        </aside>
+      </section>
+
+      <!-- SLIDE 2: Macro Shift -->
+      <section>
+        <h2>The Paradigm Shift</h2>
+        <p class="slide-subtitle">From "In-line Copilot" to "Autonomous Agent Fleet"</p>
+
+        <div class="grid-3" style="margin-bottom: 24px;">
+          <div class="metric-box">
+            <div class="metric-value purple">225M+</div>
+            <div class="metric-label">Global Developers on GitHub</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value blue">&gt; 40%</div>
+            <div class="metric-label">PRs Originating from AI Agents</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value green">10x</div>
+            <div class="metric-label">Write Throughput Shift</div>
+          </div>
+        </div>
+
+        <div class="paradigm-shift">
+          <div class="paradigm-old">Single-file Tab Autocomplete</div>
+          <div class="arrow-icon">➔</div>
+          <div class="paradigm-new">Multi-Agent Task Orchestration</div>
+        </div>
+
+        <div class="paradigm-shift">
+          <div class="paradigm-old">Developer Machine-Coupled Builds</div>
+          <div class="arrow-icon">➔</div>
+          <div class="paradigm-new">Ephemeral Cloud Sandboxes & Sessions</div>
+        </div>
+
+        <div class="paradigm-shift">
+          <div class="paradigm-old">Static Per-Seat AI Licenses</div>
+          <div class="arrow-icon">➔</div>
+          <div class="paradigm-new">Consumption Compute Pools & Credit Routing</div>
+        </div>
+
+        <aside class="notes">
+          Jay Parikh opened the keynote with metrics from Octoverse 2026 that should reshape how we design our developer platform. 
+          There are now 225 million developers on GitHub, and more than 40 percent of all pull requests created today start with an AI agent's draft.
+          Let's absorb that: the bottleneck in our engineering organization is no longer typing velocity or syntax generation. 
+          The bottleneck is architectural boundaries, verification throughput, and automated governance. 
+          We are no longer building for developers sitting in an IDE typing code line-by-line; we are architecting environments where human engineers guide and govern fleets of autonomous agents.
+        </aside>
+      </section>
+
+      <!-- SLIDE 3: Copilot Fusion -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> Jay Parikh & Product Keynote</span>
+        <h2>Copilot Fusion</h2>
+        <p class="slide-subtitle">Intelligent Dynamic Multi-Model Routing</p>
+
+        <div class="grid-2">
+          <div class="card purple">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d2a8ff" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Dynamic Model Selection
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>No Single-Model Lock-in:</strong> Intelligently routes individual sub-tasks across Claude 3.5/3.7, GPT-4o/o1, Gemini, and specialized domain models.</li>
+                <li><strong>Task-Specific Optimization:</strong> Cheap/fast models handle syntax, formatting, and unit test scaffolding.</li>
+                <li><strong>Deep Reasoning:</strong> Frontier reasoning models engage dynamically for cross-repo refactors and architectural diff analysis.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card blue">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#79c0ff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Architectural Takeaway
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Decoupled Inference Layer:</strong> System architectures must treat LLMs as interchangeable, dynamic compute primitives rather than rigid dependencies.</li>
+                <li><strong>Cost & Latency Arbitrage:</strong> Orchestrators optimize budget caps while maintaining sub-second feedback for simple tasks and asynchronous deep planning for complex jobs.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          The first major technical announcement was Copilot Fusion, now entering General Availability. 
+          In the past, Copilot meant one vendor model. Fusion introduces an intelligent routing layer. 
+          When an agent takes on a task, Fusion dynamically routes each phase of work: fast, economical models for boilerplate and test templates, 
+          and advanced frontier reasoning models like Claude and OpenAI o-series for complex refactoring and dependency analysis. 
+          For our architecture team, this validates our decoupling strategy: we must never hardcode an application or CI pipeline to a single LLM API. 
+          Our internal tools must adopt model-routing architectures.
+        </aside>
+      </section>
+
+      <!-- SLIDE 4: Multi-Repo & Projects -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> Cassidy Williams & Burke Holland Demos</span>
+        <h2>Copilot Projects & Canvases</h2>
+        <p class="slide-subtitle">Breaking the Single-Repository Barrier</p>
+
+        <div class="grid-2">
+          <div class="card blue">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#79c0ff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Multi-Repo Orchestration
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Cross-Repository Awareness:</strong> Public preview of <em>Copilot Projects</em> coordinates tasks spanning microservices, client apps, and shared schemas.</li>
+                <li><strong>Synchronized PR Chains:</strong> Agent generates coordinated pull requests across downstream consumer repos and upstream service contracts.</li>
+                <li><strong>Visual Canvas Planning:</strong> Ingests Figma/UI mockups, design tokens, and markdown specs directly into the agent planning loop.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card purple">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d2a8ff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 14.14 14.14"/></svg>
+              The Architecture Challenge
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Contract Rigor:</strong> Multi-repo agents fail when API boundaries are implicit or poorly typed.</li>
+                <li><strong>Schema-First Mandate:</strong> Machine-readable OpenAPI, Protobuf, and TypeScript declarations are now prerequisites for agent velocity.</li>
+                <li><strong>Distributed Dependency Tracking:</strong> Need centralized artifact registries and semantic versioning enforcement.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Next, Cassidy Williams and Burke Holland demonstrated Copilot Projects and the new Canvases UI. 
+          Historically, AI assistants suffered from severe amnesia at repository boundaries. 
+          Burke demonstrated an agent that took a single high-level spec and a design mockup, and synchronized changes across three separate repositories: 
+          updating an API schema, modifying a backend microservice, and updating the frontend consumer in one coherent transaction. 
+          Here's our takeaway: agents can only coordinate across multiple repositories if our interface contracts are explicit, strictly typed, and machine-readable. 
+          Schema-first design is no longer just documentation hygiene—it's the fuel for agent orchestration.
+        </aside>
+      </section>
+
+      <!-- SLIDE 5: Cross-Surface Continuity -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> Damian Brady Live Demo</span>
+        <h2>Cross-Surface Continuity</h2>
+        <p class="slide-subtitle">Cloud Sandboxes & Mobile-to-IDE Seamless Handoff</p>
+
+        <div class="card green" style="margin-bottom: 20px; text-align: left;">
+          <div class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56d364" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            Live Scenario: Café Order Incident Triage
+          </div>
+          <div class="card-body">
+            Damian received a production incident alert on his phone while off-site. 
+            He initiated an autonomous Copilot fix directly from the GitHub Mobile app. 
+            The agent spun up an isolated cloud execution sandbox, reproduced the bug against live integration mocks, wrote the fix, and passed test suites. 
+            When Damian opened his laptop, he seamlessly resumed the exact cloud session in VS Code without re-running builds or losing terminal state.
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Cloud Execution Sandboxes</div>
+            <div class="card-body">
+              Agents execute in ephemeral, sandboxed cloud containers. Local machine setup drift is eliminated; tests run in authenticated runtime clones.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Stateful Continuity</div>
+            <div class="card-body">
+              Chat context, diff buffers, reproduction logs, and terminal sessions persist in the cloud, accessible across Web, Mobile, CLI, and IDE.
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Damian Brady delivered one of the most talked-about demos. 
+          He received an incident alert on his mobile phone for a café ordering service that stopped taking orders. 
+          Right from his phone, he triggered a Copilot investigation. 
+          Copilot spun up an isolated cloud sandbox, ran the test suite, reproduced the bug, and generated a candidate patch. 
+          When Damian returned to his workstation, he opened VS Code and the entire session—terminal logs, diff state, and running sandbox—was waiting for him. 
+          This proves the shift away from local developer machines. 
+          Our architecture should prioritize standardized cloud development environments and ephemeral sandboxes for automated workflows.
+        </aside>
+      </section>
+
+      <!-- SLIDE 6: Rebuilding Git -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> April Leonard Infrastructure Keynote</span>
+        <h2>Rebuilding Git for Agent Scale</h2>
+        <p class="slide-subtitle">Underlying Infrastructure & DevOps Modernization</p>
+
+        <div class="grid-3">
+          <div class="card coral">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f78166" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              Git Core Re-Engineering
+            </div>
+            <div class="card-body">
+              GitHub rebuilt core parts of the Git storage and write pipelines to handle massive spikes in automated agent commits, branching, and ref-updates without lock contention.
+            </div>
+          </div>
+
+          <div class="card blue">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#79c0ff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Actions Workflow Lockfiles
+            </div>
+            <div class="card-body">
+              Pinning action dependencies cryptographically with immutable lockfiles, backed by organization-wide policies to prevent CI/CD supply-chain poisoning.
+            </div>
+          </div>
+
+          <div class="card purple">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d2a8ff" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+              Multi-Cloud Compute
+            </div>
+            <div class="card-body">
+              Native GitHub Actions compute allowing Linux workloads to execute directly inside customer VPCs (AWS, Azure) with a unified dollar-credit pool.
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          April Leonard provided the engineering reality check. 
+          When hundreds of millions of developers unleash fleets of AI agents, Git's traditional object storage model faces write lock contention at unprecedented scale. 
+          GitHub literally re-engineered parts of the core Git write and ref pipeline to withstand this order-of-magnitude increase in automated commits. 
+          On the DevOps side, they introduced two massive features: 
+          First, Actions Workflow Lockfiles, which lock third-party actions to immutable hashes—eliminating a major supply chain attack vector. 
+          Second, Multi-Cloud Compute runners, allowing eligible Linux jobs to execute in our own AWS and cloud VPCs under a single consolidated credit billing model.
+        </aside>
+      </section>
+
+      <!-- SLIDE 7: Autonomous Quality -->
+      <section>
+        <h2>Quality, Merge & Governance</h2>
+        <p class="slide-subtitle">Guarding Architectural Integrity at Agent Speed</p>
+
+        <div class="grid-2">
+          <div class="card purple">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d2a8ff" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Copilot Code Review "Max"
+            </div>
+            <div class="card-body">
+              Multi-model adversarial code review. Deep static checks, security taint tracking, and architectural regression detection before human review.
+            </div>
+          </div>
+
+          <div class="card green">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56d364" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
+              Agent Merge & Auto-Conflict Fix
+            </div>
+            <div class="card-body">
+              Agents autonomously rebase branches, resolve semantic merge conflicts, and remediate broken CI test runs without requiring human context-switching.
+            </div>
+          </div>
+
+          <div class="card blue">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#79c0ff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Path-Scoped Approvals
+            </div>
+            <div class="card-body">
+              Admins configure automated agent approval authority scoped strictly to safe paths (docs, generated client stubs), with hard gates on core domain logic.
+            </div>
+          </div>
+
+          <div class="card coral">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f78166" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Dependabot Reachability Analysis
+            </div>
+            <div class="card-body">
+              Static call-graph analysis for JS/TS: determines if vulnerable dependency functions are actually invoked in production code, slashing alert noise by 70%+.
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Now let's talk about the big question for our architecture team: if agents write 40% of code, how do we keep our codebase from turning into spaghetti? 
+          GitHub answered this with four critical governance features: 
+          First, Copilot Code Review 'Max'—a multi-model adversarial review system that critiques incoming code for performance, security, and design antipatterns. 
+          Second, Agent Merge—which autonomously rebases and fixes failing CI test runs. 
+          Third, Path-Scoped Approvals—which allows us to give agents authority to approve safe paths like schema generation, while strictly reserving human approval for architectural boundaries. 
+          And fourth, Dependabot Reachability Analysis—which eliminates security alert fatigue by verifying if vulnerable code paths are actually called.
+        </aside>
+      </section>
+
+      <!-- SLIDE 8: 4 Architectural Imperatives -->
+      <section>
+        <h2>4 Takeaways for Our Team</h2>
+        <p class="slide-subtitle">Translating Keynote Innovations into Our Architectural Roadmap</p>
+
+        <div class="arch-takeaway-item">
+          <div class="takeaway-number">1</div>
+          <div class="takeaway-content">
+            <h4>Strict Contract-First Architecture</h4>
+            <p>Treat OpenAPI, Protobuf, and GraphQL schemas as primary artifacts. Agents can orchestrate across our microservices only when interfaces are unambiguously defined and validated.</p>
+          </div>
+        </div>
+
+        <div class="arch-takeaway-item">
+          <div class="takeaway-number">2</div>
+          <div class="takeaway-content">
+            <h4>Standardize on Ephemeral Cloud Sandboxes</h4>
+            <p>Move away from brittle local developer setups. Invest in containerized cloud sandboxes so developers and agents can seamlessly share runtime execution state.</p>
+          </div>
+        </div>
+
+        <div class="arch-takeaway-item">
+          <div class="takeaway-number">3</div>
+          <div class="takeaway-content">
+            <h4>Harden CI/CD with Workflow Lockfiles & Scoped Merges</h4>
+            <p>Adopt GitHub Actions Workflow Lockfiles immediately. Define fine-grained CODEOWNERS rules granting agent merge authority on boilerplate while protecting core domain models.</p>
+          </div>
+        </div>
+
+        <div class="arch-takeaway-item">
+          <div class="takeaway-number">4</div>
+          <div class="takeaway-content">
+            <h4>Design Internal Tooling for Model Fusion</h4>
+            <p>Avoid single-model lock-in in our internal automation. Structure prompts, evaluation datasets, and orchestration layers to leverage dynamic model routing.</p>
+          </div>
+        </div>
+
+        <aside class="notes">
+          To wrap up my opening remarks, here are the 4 strategic initiatives I recommend for our architecture team this quarter:
+          Number 1: Contract-First Architecture. Let's make all service interfaces machine-readable so cross-repo agents can operate without friction.
+          Number 2: Standardize on Ephemeral Cloud Sandboxes. Local machine variance is our biggest drag on velocity.
+          Number 3: Supply chain hygiene and path-scoped governance. Let's roll out Actions Workflow Lockfiles and establish clear blast-radius boundaries for automated merges.
+          Number 4: Model abstraction. Ensure our internal developer tools are built with model routers like Fusion, rather than brittle single-model APIs.
+        </aside>
+      </section>
+
+      <!-- SLIDE 9: Transition to Next Segment / Q&A -->
+      <section>
+        <div style="margin-bottom: 20px;">
+          <span class="badge-universe">Debrief Complete</span>
+        </div>
+        <h1 style="font-size: 2.1em;">Next: Deep-Dive Segments</h1>
+        <p class="slide-subtitle">Ready to explore the technical architecture or platform scalability?</p>
+
+        <div class="grid-2" style="margin-top: 30px;">
+          <a href="../02-agentic-architecture/" class="card blue" style="text-decoration: none; cursor: pointer; display: block;">
+            <div class="card-title" style="color: var(--gh-blue-light);">
+              Segment 2: Agentic Architecture & Multi-Repo ›
+            </div>
+            <div class="card-body">
+              Deep dive into Copilot Fusion model routing, cross-repository state synchronization, and schema-first system design. (10–12 mins)
+            </div>
+          </a>
+
+          <a href="../03-devops-governance/" class="card purple" style="text-decoration: none; cursor: pointer; display: block;">
+            <div class="card-title" style="color: var(--gh-purple-light);">
+              Segment 3: Platform Scale & Governance ›
+            </div>
+            <div class="card-body">
+              Deep dive into Git core write scaling, Actions Workflow Lockfiles, Multi-Cloud compute, and blast-radius governance. (8–10 mins)
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 35px;">
+          <a href="../02-agentic-architecture/" class="deck-btn primary" style="padding: 10px 24px; font-size: 14px; display: inline-flex; margin: 0 auto;">
+            Launch Segment 2 Presentation ›
+          </a>
+        </div>
+
+        <aside class="notes">
+          Thank you all for listening to this quick debrief. 
+          That concludes the opening 4-minute overview. 
+          We can now either open up for immediate high-level questions, or dive directly into Segment 2 where we examine the technical architecture of multi-repo agent coordination and model routing.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+
+  <!-- Shared Deck Runtime -->
+  <script src="../../assets/js/deck-runtime.js"></script>
+  <script>
+    // Initialize current presentation deck with pacing thresholds (Warn at 3m, Alert at 5m)
+    initPresentationDeck({
+      currentDeckId: "01-keynote-debrief",
+      warnSecs: 180,
+      alertSecs: 300
+    });
+  </script>
+</body>
+</html>

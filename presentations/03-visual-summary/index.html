@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Part 3: Executive Visual Summary - GitHub Universe 2026</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2358a6ff'><path d='M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'/></svg>">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+
+  <link rel="stylesheet" href="../../assets/css/deck-theme.css">
+</head>
+<body>
+  <div class="universe-glow"></div>
+
+  <!-- Top HUD Header -->
+  <div class="top-hud">
+    <div class="hud-left">
+      <a href="../../" title="Back to Presentation Portal" style="font-weight: 600;">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>
+        Hub
+      </a>
+      <span class="badge-universe">Part 3</span>
+
+      <!-- Presentation Dropdown Switcher -->
+      <div class="deck-switcher">
+        <button class="deck-select-btn" onclick="toggleDeckMenu()">
+          <span>Visual Executive Deck (Few Words)</span>
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z"/></svg>
+        </button>
+        <div class="deck-dropdown-menu" id="deckDropdownMenu"></div>
+      </div>
+    </div>
+
+    <div class="hud-right">
+      <span class="live-timer" id="presentationTimer" title="Presentation Time">00:00</span>
+      <a href="../01-keynote-debrief/" style="color: var(--gh-muted);" title="Go to Part 1">‹ Part 1</a>
+      <a href="../02-keynote-recap/" style="color: var(--gh-muted);" title="Go to Part 2">Part 2</a>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="deck-controls">
+    <button class="deck-btn" onclick="toggleNotesOverlay()" title="Toggle Speaker Notes [N]">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Notes
+    </button>
+    <button class="deck-btn" onclick="Reveal.prev()" title="Previous Slide [←]">‹ Prev</button>
+    <button class="deck-btn primary" onclick="Reveal.next()" title="Next Slide [→]">Next ›</button>
+    <button class="deck-btn" onclick="Reveal.toggleOverview()" title="Slide Overview [Esc / O]">Overview</button>
+    <button class="deck-btn" onclick="toggleFullScreen()" title="Fullscreen [F]">⛶</button>
+  </div>
+
+  <!-- In-Slide Notes Modal -->
+  <div class="notes-overlay" id="notesOverlay">
+    <div class="notes-header">
+      <span>🎙️ SPEAKER SCRIPT (MINIMALIST TALK)</span>
+      <span style="cursor: pointer; color: var(--gh-muted);" onclick="toggleNotesOverlay()">✕</span>
+    </div>
+    <div id="notesContent">Loading talking points...</div>
+  </div>
+
+  <div class="key-hints">
+    <span>Navigate: <kbd>→</kbd> <kbd>Space</kbd></span>
+    <span>Overview: <kbd>Esc</kbd></span>
+    <span>Speaker View: <kbd>S</kbd></span>
+    <span>Notes: <kbd>N</kbd></span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: Title -->
+      <section>
+        <div style="margin-bottom: 20px;">
+          <span class="badge-universe">GitHub Universe 2026</span>
+        </div>
+        <div class="hero-statement gradient" style="font-size: 3.2em; margin-bottom: 10px;">
+          The Agentic Era
+        </div>
+        <p class="slide-subtitle" style="font-size: 1.1em; color: var(--gh-text-primary);">
+          Executive Architecture Brief
+        </p>
+
+        <div style="margin-top: 40px;">
+          <button class="deck-btn primary" style="padding: 12px 28px; font-size: 15px; margin: 0 auto;" onclick="Reveal.next()">
+            Begin Brief ›
+          </button>
+        </div>
+
+        <aside class="notes">
+          Good morning architecture team. Today I am giving you the visual executive summary of GitHub Universe 2026. 
+          The takeaway is simple: we are officially moving past the era of AI as a typing assistant into what GitHub calls 
+          the Agentic Software Delivery System. Over the next three minutes, we will cover the 5 core architectural shifts you need to know.
+        </aside>
+      </section>
+
+      <!-- SLIDE 2: The Inflection Point -->
+      <section>
+        <div class="minimal-grid-3">
+          <div class="metric-box">
+            <div class="metric-value purple">225M</div>
+            <div class="metric-label">Developers</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value blue">&gt; 40%</div>
+            <div class="metric-label">Agent-Created PRs</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value green">10x</div>
+            <div class="metric-label">Write Velocity</div>
+          </div>
+        </div>
+
+        <div class="hero-statement" style="font-size: 1.8em; color: #ffffff; margin-top: 30px;">
+          Software delivery is no longer typing-bound.
+        </div>
+
+        <div class="punchline-callout">
+          <span>The bottleneck is architectural clarity and automated governance.</span>
+        </div>
+
+        <aside class="notes">
+          Look at these numbers from the 2026 Octoverse report: 225 million developers, and more than 40 percent of all pull requests created today start with an AI agent's draft. 
+          This means developer velocity is no longer limited by typing speed. 
+          The bottleneck is our architectural contracts, verification speed, and review governance.
+        </aside>
+      </section>
+
+      <!-- SLIDE 3: Copilot Fusion Model -->
+      <section>
+        <h2 style="font-size: 2em; margin-bottom: 5px;">Copilot Fusion</h2>
+        <p class="slide-subtitle">Dynamic Multi-Model Routing</p>
+
+        <div class="minimal-grid-3">
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-purple);">
+            <div class="minimal-card-icon">🧠</div>
+            <div class="minimal-card-title">Claude 3.7 &amp; o1</div>
+            <div class="minimal-card-sub">Deep Reasoning Tier</div>
+          </div>
+
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-blue);">
+            <div class="minimal-card-icon">⚡</div>
+            <div class="minimal-card-title">Flash &amp; GPT-4o</div>
+            <div class="minimal-card-sub">High-Throughput Tier</div>
+          </div>
+
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-green);">
+            <div class="minimal-card-icon">🎯</div>
+            <div class="minimal-card-title">Deterministic AST</div>
+            <div class="minimal-card-sub">LSPs &amp; Compiler Tooling</div>
+          </div>
+        </div>
+
+        <div class="punchline-callout">
+          <span>Right model. Right task. Zero vendor lock-in.</span>
+        </div>
+
+        <aside class="notes">
+          Core update number one: Copilot Fusion. 
+          Fusion is an intelligent router. It dynamically breaks tasks apart: 
+          fast, economical models handle syntax and unit tests; frontier reasoning models like Claude 3.7 and o1 handle complex architectural refactoring. 
+          For our team, this means our internal tools must adopt dynamic model-routing layers rather than hardcoding to a single LLM API.
+        </aside>
+      </section>
+
+      <!-- SLIDE 4: Projects, Canvases & Continuity -->
+      <section>
+        <h2 style="font-size: 2em; margin-bottom: 5px;">Projects &amp; Continuity</h2>
+        <p class="slide-subtitle">Breaking Repository &amp; Machine Boundaries</p>
+
+        <div class="minimal-grid-3">
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-blue);">
+            <div class="minimal-card-icon">📦</div>
+            <div class="minimal-card-title">Copilot Projects</div>
+            <div class="minimal-card-sub">Cross-Repo PR Chains</div>
+          </div>
+
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-purple);">
+            <div class="minimal-card-icon">🎨</div>
+            <div class="minimal-card-title">Visual Canvases</div>
+            <div class="minimal-card-sub">Figma &amp; Specs to Code</div>
+          </div>
+
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-green);">
+            <div class="minimal-card-icon">☁️</div>
+            <div class="minimal-card-title">Cloud Continuity</div>
+            <div class="minimal-card-sub">Mobile ➔ Sandbox ➔ IDE</div>
+          </div>
+        </div>
+
+        <div class="punchline-callout">
+          <span>State follows the developer. Local environments are legacy.</span>
+        </div>
+
+        <aside class="notes">
+          Core update number two: Copilot Projects and cross-surface continuity. 
+          Burke Holland demonstrated an agent taking a single spec and synchronizing changes across three microservices simultaneously. 
+          Damian Brady showed starting an incident investigation on mobile, spinning up a cloud sandbox, and seamlessly resuming in VS Code. 
+          Execution state now lives in the cloud, uncoupling developers from brittle local laptop environments.
+        </aside>
+      </section>
+
+      <!-- SLIDE 5: Rebuilding Git for Agent Scale -->
+      <section>
+        <h2 style="font-size: 2em; margin-bottom: 5px;">Rebuilding Git</h2>
+        <p class="slide-subtitle">Platform Scale for 45 Billion Actions</p>
+
+        <div class="minimal-grid-3">
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-coral);">
+            <div class="minimal-card-icon">⚡</div>
+            <div class="minimal-card-title">Lockless Ref Storage</div>
+            <div class="minimal-card-sub">Zero Write Contention</div>
+          </div>
+
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-blue);">
+            <div class="minimal-card-icon">🔒</div>
+            <div class="minimal-card-title">Actions Lockfiles</div>
+            <div class="minimal-card-sub">Cryptographic Pinning</div>
+          </div>
+
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-purple);">
+            <div class="minimal-card-icon">🌐</div>
+            <div class="minimal-card-title">Multi-Cloud Runners</div>
+            <div class="minimal-card-sub">Native In-VPC Compute</div>
+          </div>
+        </div>
+
+        <div class="punchline-callout">
+          <span>Git re-engineered for machine-generated write storms.</span>
+        </div>
+
+        <aside class="notes">
+          Core update number three: Rebuilding Git infrastructure. 
+          April Leonard revealed that Git's storage engine was re-architected with lockless ref transactions to withstand agent write storms. 
+          On the DevOps side, Actions Workflow Lockfiles cryptographically pin third-party actions—protecting our CI supply chain—and Multi-Cloud Runners execute directly inside our AWS VPCs.
+        </aside>
+      </section>
+
+      <!-- SLIDE 6: Quality, Merge & Governance -->
+      <section>
+        <h2 style="font-size: 2em; margin-bottom: 5px;">Quality &amp; Governance</h2>
+        <p class="slide-subtitle">Speed with Absolute Architectural Guardrails</p>
+
+        <div class="minimal-grid-3">
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-purple);">
+            <div class="minimal-card-icon">🛡️</div>
+            <div class="minimal-card-title">Review "Max"</div>
+            <div class="minimal-card-sub">Adversarial Call-Graph Audit</div>
+          </div>
+
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-green);">
+            <div class="minimal-card-icon">🔀</div>
+            <div class="minimal-card-title">Agent Merge</div>
+            <div class="minimal-card-sub">Auto-Conflict &amp; CI Repair</div>
+          </div>
+
+          <div class="minimal-card" style="border-top: 4px solid var(--gh-coral);">
+            <div class="minimal-card-icon">🎯</div>
+            <div class="minimal-card-title">Scoped Gates</div>
+            <div class="minimal-card-sub">Blast-Radius CODEOWNERS</div>
+          </div>
+        </div>
+
+        <div class="punchline-callout">
+          <span>Automate the plumbing. Guard the core architecture.</span>
+        </div>
+
+        <aside class="notes">
+          Core update number four: Quality and governance. 
+          If agents write 40% of code, how do we keep quality high? 
+          Code Review Max runs multi-model adversarial reviews across call graphs. 
+          Agent Merge automatically fixes merge conflicts and failing CI runs. 
+          And Path-Scoped Approvals let us authorize agents to auto-merge safe paths like client generation, while requiring human architect sign-off on domain logic.
+        </aside>
+      </section>
+
+      <!-- SLIDE 7: The 3 Architecture Directives -->
+      <section>
+        <div style="margin-bottom: 15px;">
+          <span class="badge-universe">Action Items</span>
+        </div>
+        <div class="hero-statement" style="font-size: 2.1em; margin-bottom: 25px;">
+          What We Must Build
+        </div>
+
+        <div class="minimal-grid-3">
+          <div class="minimal-card">
+            <div style="font-size: 2em; font-weight: 800; color: var(--gh-purple-light); margin-bottom: 8px;">01</div>
+            <div class="minimal-card-title">Contract-First</div>
+            <div style="font-size: 0.75em; color: var(--gh-muted);">OpenAPI &amp; Protobuf schemas for all microservices.</div>
+          </div>
+
+          <div class="minimal-card">
+            <div style="font-size: 2em; font-weight: 800; color: var(--gh-blue-light); margin-bottom: 8px;">02</div>
+            <div class="minimal-card-title">Cloud Sandboxes</div>
+            <div style="font-size: 0.75em; color: var(--gh-muted);">Standardize on containerized runtime execution.</div>
+          </div>
+
+          <div class="minimal-card">
+            <div style="font-size: 2em; font-weight: 800; color: var(--gh-green-light); margin-bottom: 8px;">03</div>
+            <div class="minimal-card-title">Scoped Approvals</div>
+            <div style="font-size: 0.75em; color: var(--gh-muted);">Lockfiles + CODEOWNERS blast-radius policies.</div>
+          </div>
+        </div>
+
+        <div class="punchline-callout" style="background: rgba(46, 160, 67, 0.15); border-color: rgba(46, 160, 67, 0.4); color: #56d364;">
+          <span>Ship faster. Stay secure. Govern by contract.</span>
+        </div>
+
+        <aside class="notes">
+          Here is our immediate roadmap:
+          1. Contract-First: Clean schemas are mandatory for multi-repo agents.
+          2. Cloud Sandboxes: End local workstation drift.
+          3. Scoped Approvals: Turn on Actions Lockfiles and define clear blast-radius boundaries for automated merges.
+        </aside>
+      </section>
+
+      <!-- SLIDE 8: Discussion Kickoff -->
+      <section>
+        <div style="margin-bottom: 20px;">
+          <span class="badge-universe">Architecture Team Working Session</span>
+        </div>
+        <div class="hero-statement gradient" style="font-size: 2.8em; margin-bottom: 15px;">
+          Discussion
+        </div>
+        <p class="slide-subtitle" style="font-size: 1.15em;">
+          Where do we pilot agentic workflows first?
+        </p>
+
+        <div style="margin-top: 40px; display: flex; justify-content: center; gap: 14px;">
+          <a href="../01-keynote-debrief/" class="deck-btn">
+            ‹ Part 1: Keynote Debrief
+          </a>
+          <a href="../02-keynote-recap/" class="deck-btn">
+            Part 2: Full Product Recap ›
+          </a>
+          <a href="../../" class="deck-btn primary">
+            Hub Portal ›
+          </a>
+        </div>
+
+        <aside class="notes">
+          That concludes our visual brief. 
+          Let's open up the room: which of our microservices have the cleanest contracts to pilot multi-repo agents, 
+          and where can Agent Merge save our engineers the most time?
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+
+  <script src="../../assets/js/deck-runtime.js"></script>
+  <script>
+    initPresentationDeck({
+      currentDeckId: "03-visual-summary",
+      warnSecs: 180,  // 3 mins warn
+      alertSecs: 300  // 5 mins alert
+    });
+  </script>
+</body>
+</html>

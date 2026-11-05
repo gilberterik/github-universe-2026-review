@@ -15,7 +15,7 @@ Once enabled in repository settings (**Settings → Pages → Branch: `main`, Fo
 
 ## 📑 Presentation Architecture & Flow
 
-This repository hosts **two interconnected presentations** sharing a unified design system and runtime engine:
+This repository hosts **three interconnected presentations** sharing a unified design system and runtime engine:
 
 ```
 github-universe-2026-review/
@@ -29,19 +29,21 @@ github-universe-2026-review/
 └── presentations/
     ├── 01-keynote-debrief/              # ⏱️ Part 1: Opening Talk (3–5 mins)
     │   └── index.html                   # [Video: AArI948SDz8]
-    └── 02-keynote-recap/                # ⏱️ Part 2: Everything Announced (8–10 mins)
-        └── index.html                   # [Video: xbCa0aa4tRM]
+    ├── 02-keynote-recap/                # ⏱️ Part 2: Everything Announced (8–10 mins)
+    │   └── index.html                   # [Video: xbCa0aa4tRM]
+    └── 03-visual-summary/               # ⏱️ Part 3: Executive Visual Summary (3–5 mins)
+        └── index.html                   # [Minimalist / Very Few Words]
 ```
 
 ### 🔗 Seamless Flow Between Presentations
 * **At the end of Part 1 (Slide 9):**  
   There is a prominent **`Continue to Part 2: Everything Announced Recap ›`** callout button. You can also press <kbd>J</kbd> on your keyboard to instantly transition to Part 2 without touching the mouse.
 * **Top HUD Dropdown:**  
-  Both decks include an instant switcher dropdown in the top bar to hop between Part 1, Part 2, or back to the Hub at any time during your talk.
+  All decks include an instant switcher dropdown in the top bar to hop between Part 1, Part 2, Part 3, or back to the Hub at any time during your talk.
 
 ---
 
-## 🎯 The Two Presentations
+## 🎯 The Three Presentations
 
 ### [Part 1: Keynote Debrief & Architecture Shift](file:///C:/Users/erik/src/github.com/github-universe-2026-review/presentations/01-keynote-debrief/index.html)
 * **Source Video:** [Opening Keynote (AArI948SDz8)](https://www.youtube.com/watch?v=AArI948SDz8)
@@ -70,6 +72,17 @@ github-universe-2026-review/
   - Enterprise Shift: Consumption AI usage contracts & unified credit pools.
   - Rebuilding Git: Lockless ref updates and storage scaling for 45B+ Actions jobs.
   - Architecture Action Plan & team discussion kickoff.
+
+### [Part 3: Executive Visual Summary (Few Words)](file:///C:/Users/erik/src/github.com/github-universe-2026-review/presentations/03-visual-summary/index.html)
+* **Style:** High-impact, minimalist presentation with very few words per slide.
+* **Duration:** 3–5 minutes (Fast executive briefing)
+* **Pacing Thresholds:** Amber warning at 3:00, red alert at 5:00.
+* **Topics Covered:**
+  - **Infrastructure Upgrades:** Scaled for 45B+ Actions and machine write bursts.
+  - **Copilot Fusion Model:** Dynamic multi-model routing across frontier reasoning models.
+  - **Projects, Canvases & Continuity:** Cross-repo PR chains and cloud execution state.
+  - **Rebuilding Git for Agent Scale:** Lockless ref updates and cryptographic Actions lockfiles.
+  - **Quality Merge & Governance:** Code Review Max, auto-merge repairs, and path-scoped CODEOWNERS gates.
 
 ---
 

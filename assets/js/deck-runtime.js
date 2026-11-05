@@ -21,6 +21,13 @@
       badge: "Full Product Breakdown",
       videoUrl: "https://www.youtube.com/watch?v=xbCa0aa4tRM",
       url: "../02-keynote-recap/"
+    },
+    {
+      id: "03-visual-summary",
+      title: "Part 3: Minimalist Executive Deck",
+      duration: "3–5 mins",
+      badge: "Visual / Few Words",
+      url: "../03-visual-summary/"
     }
   ];
 

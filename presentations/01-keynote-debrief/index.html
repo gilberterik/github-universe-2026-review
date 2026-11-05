@@ -3,20 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Segment 1: Keynote Debrief - GitHub Universe 2026</title>
+  <title>Part 1: Keynote Debrief - GitHub Universe 2026</title>
   
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2358a6ff'><path d='M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'/></svg>">
 
-  <!-- Reveal.js styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
 
-  <!-- Shared Theme -->
   <link rel="stylesheet" href="../../assets/css/deck-theme.css">
 </head>
 <body>
-  <!-- Ambient Background Glow -->
   <div class="universe-glow"></div>
 
   <!-- Top HUD Header -->
@@ -26,12 +23,12 @@
         <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>
         Hub
       </a>
-      <span class="badge-universe">Segment 1</span>
+      <span class="badge-universe">Part 1</span>
 
       <!-- Presentation Segment Switcher Dropdown -->
       <div class="deck-switcher">
         <button class="deck-select-btn" onclick="toggleDeckMenu()">
-          <span>Debrief Keynote (3–5m)</span>
+          <span>Part 1: Keynote Intro (3–5m)</span>
           <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z"/></svg>
         </button>
         <div class="deck-dropdown-menu" id="deckDropdownMenu"></div>
@@ -40,6 +37,7 @@
 
     <div class="hud-right">
       <span class="live-timer" id="presentationTimer" title="Presentation Time">00:00</span>
+      <a href="../02-keynote-recap/" title="Jump to Part 2">Part 2 ›</a>
       <a href="https://www.youtube.com/watch?v=AArI948SDz8" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         Keynote Video
@@ -62,31 +60,30 @@
   <!-- In-Slide Notes Modal -->
   <div class="notes-overlay" id="notesOverlay">
     <div class="notes-header">
-      <span>🎙️ SPEAKER SCRIPT (SEGMENT 1 • 3–5 MINS)</span>
+      <span>🎙️ SPEAKER SCRIPT (PART 1 • 3–5 MINS)</span>
       <span style="cursor: pointer; color: var(--gh-muted);" onclick="toggleNotesOverlay()">✕</span>
     </div>
     <div id="notesContent">Loading talking points...</div>
   </div>
 
-  <!-- Keyboard Shortcuts Hint -->
   <div class="key-hints">
     <span>Navigate: <kbd>→</kbd> <kbd>Space</kbd></span>
     <span>Overview: <kbd>Esc</kbd></span>
     <span>Speaker View: <kbd>S</kbd></span>
     <span>In-Slide Notes: <kbd>N</kbd></span>
+    <span>Next Deck: <kbd>J</kbd></span>
   </div>
 
-  <!-- Reveal Presentation Slides -->
   <div class="reveal">
     <div class="slides">
 
       <!-- SLIDE 1: Title -->
       <section>
         <div style="margin-bottom: 15px;">
-          <span class="badge-universe">Segment 1 • 3–5 Minute Opening Debrief</span>
+          <span class="badge-universe">Part 1 • 3–5 Minute Opening Debrief</span>
         </div>
         <h1>GitHub Universe 2026</h1>
-        <h2 style="font-size: 1.25em; color: #a5d6ff; margin-bottom: 8px;">Keynote Debrief & Architecture Implications</h2>
+        <h2 style="font-size: 1.25em; color: #a5d6ff; margin-bottom: 8px;">Keynote Debrief &amp; Architecture Implications</h2>
         <p class="slide-subtitle">The Transition into the Agentic Software Delivery System</p>
         
         <div style="display: inline-flex; gap: 14px; margin-top: 15px; font-size: 0.6em; color: var(--gh-muted);">
@@ -103,8 +100,8 @@
           Good morning architecture team! Last week I attended GitHub Universe 2026 in San Francisco. 
           The opening keynote signaled the most decisive architectural inflection point our industry has seen in a decade: 
           we are officially moving past the era of AI as a simple 'code autocomplete assistant' into what GitHub calls an 
-          'Agentic Software Delivery System'. Over the next 4 minutes, I want to debrief you on the 5 core announcements 
-          from Jay Parikh, Cassidy Williams, Burke Holland, and April Leonard, and connect the dots directly to our architectural roadmap.
+          'Agentic Software Delivery System'. Over the next 4 minutes, I want to debrief you on the core announcements 
+          from Jay Parikh, Cassidy Williams, Burke Holland, and April Leonard, and then we will jump into the detailed product breakdown.
         </aside>
       </section>
 
@@ -137,13 +134,13 @@
         <div class="paradigm-shift">
           <div class="paradigm-old">Developer Machine-Coupled Builds</div>
           <div class="arrow-icon">➔</div>
-          <div class="paradigm-new">Ephemeral Cloud Sandboxes & Sessions</div>
+          <div class="paradigm-new">Ephemeral Cloud Sandboxes &amp; Sessions</div>
         </div>
 
         <div class="paradigm-shift">
           <div class="paradigm-old">Static Per-Seat AI Licenses</div>
           <div class="arrow-icon">➔</div>
-          <div class="paradigm-new">Consumption Compute Pools & Credit Routing</div>
+          <div class="paradigm-new">Consumption Compute Pools &amp; Credit Routing</div>
         </div>
 
         <aside class="notes">
@@ -157,7 +154,7 @@
 
       <!-- SLIDE 3: Copilot Fusion -->
       <section>
-        <span class="speaker-pill"><span class="dot"></span> Jay Parikh & Product Keynote</span>
+        <span class="speaker-pill"><span class="dot"></span> Jay Parikh &amp; Product Keynote</span>
         <h2>Copilot Fusion</h2>
         <p class="slide-subtitle">Intelligent Dynamic Multi-Model Routing</p>
 
@@ -184,7 +181,7 @@
             <div class="card-body">
               <ul>
                 <li><strong>Decoupled Inference Layer:</strong> System architectures must treat LLMs as interchangeable, dynamic compute primitives rather than rigid dependencies.</li>
-                <li><strong>Cost & Latency Arbitrage:</strong> Orchestrators optimize budget caps while maintaining sub-second feedback for simple tasks and asynchronous deep planning for complex jobs.</li>
+                <li><strong>Cost &amp; Latency Arbitrage:</strong> Orchestrators optimize budget caps while maintaining sub-second feedback for simple tasks and asynchronous deep planning for complex jobs.</li>
               </ul>
             </div>
           </div>
@@ -202,8 +199,8 @@
 
       <!-- SLIDE 4: Multi-Repo & Projects -->
       <section>
-        <span class="speaker-pill"><span class="dot"></span> Cassidy Williams & Burke Holland Demos</span>
-        <h2>Copilot Projects & Canvases</h2>
+        <span class="speaker-pill"><span class="dot"></span> Cassidy Williams &amp; Burke Holland Demos</span>
+        <h2>Copilot Projects &amp; Canvases</h2>
         <p class="slide-subtitle">Breaking the Single-Repository Barrier</p>
 
         <div class="grid-2">
@@ -250,7 +247,7 @@
       <section>
         <span class="speaker-pill"><span class="dot"></span> Damian Brady Live Demo</span>
         <h2>Cross-Surface Continuity</h2>
-        <p class="slide-subtitle">Cloud Sandboxes & Mobile-to-IDE Seamless Handoff</p>
+        <p class="slide-subtitle">Cloud Sandboxes &amp; Mobile-to-IDE Seamless Handoff</p>
 
         <div class="card green" style="margin-bottom: 20px; text-align: left;">
           <div class="card-title">
@@ -295,7 +292,7 @@
       <section>
         <span class="speaker-pill"><span class="dot"></span> April Leonard Infrastructure Keynote</span>
         <h2>Rebuilding Git for Agent Scale</h2>
-        <p class="slide-subtitle">Underlying Infrastructure & DevOps Modernization</p>
+        <p class="slide-subtitle">Underlying Infrastructure &amp; DevOps Modernization</p>
 
         <div class="grid-3">
           <div class="card coral">
@@ -341,7 +338,7 @@
 
       <!-- SLIDE 7: Autonomous Quality -->
       <section>
-        <h2>Quality, Merge & Governance</h2>
+        <h2>Quality, Merge &amp; Governance</h2>
         <p class="slide-subtitle">Guarding Architectural Integrity at Agent Speed</p>
 
         <div class="grid-2">
@@ -358,7 +355,7 @@
           <div class="card green">
             <div class="card-title">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56d364" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
-              Agent Merge & Auto-Conflict Fix
+              Agent Merge &amp; Auto-Conflict Fix
             </div>
             <div class="card-body">
               Agents autonomously rebase branches, resolve semantic merge conflicts, and remediate broken CI test runs without requiring human context-switching.
@@ -420,7 +417,7 @@
         <div class="arch-takeaway-item">
           <div class="takeaway-number">3</div>
           <div class="takeaway-content">
-            <h4>Harden CI/CD with Workflow Lockfiles & Scoped Merges</h4>
+            <h4>Harden CI/CD with Workflow Lockfiles &amp; Scoped Merges</h4>
             <p>Adopt GitHub Actions Workflow Lockfiles immediately. Define fine-grained CODEOWNERS rules granting agent merge authority on boilerplate while protecting core domain models.</p>
           </div>
         </div>
@@ -442,63 +439,58 @@
         </aside>
       </section>
 
-      <!-- SLIDE 9: Transition to Next Segment / Q&A -->
+      <!-- SLIDE 9: Transition to Part 2 -->
       <section>
         <div style="margin-bottom: 20px;">
-          <span class="badge-universe">Debrief Complete</span>
+          <span class="badge-universe">Part 1 Complete • Transition</span>
         </div>
-        <h1 style="font-size: 2.1em;">Next: Deep-Dive Segments</h1>
-        <p class="slide-subtitle">Ready to explore the technical architecture or platform scalability?</p>
+        <h1 style="font-size: 2.1em;">Up Next: Part 2</h1>
+        <h2 style="font-size: 1.25em; color: var(--gh-purple-light); margin-bottom: 8px;">Everything Announced: Keynote Recap</h2>
+        <p class="slide-subtitle">Ready to explore the complete feature and product breakdown?</p>
 
-        <div class="grid-2" style="margin-top: 30px;">
-          <a href="../02-agentic-architecture/" class="card blue" style="text-decoration: none; cursor: pointer; display: block;">
-            <div class="card-title" style="color: var(--gh-blue-light);">
-              Segment 2: Agentic Architecture & Multi-Repo ›
-            </div>
-            <div class="card-body">
-              Deep dive into Copilot Fusion model routing, cross-repository state synchronization, and schema-first system design. (10–12 mins)
-            </div>
-          </a>
-
-          <a href="../03-devops-governance/" class="card purple" style="text-decoration: none; cursor: pointer; display: block;">
-            <div class="card-title" style="color: var(--gh-purple-light);">
-              Segment 3: Platform Scale & Governance ›
-            </div>
-            <div class="card-body">
-              Deep dive into Git core write scaling, Actions Workflow Lockfiles, Multi-Cloud compute, and blast-radius governance. (8–10 mins)
-            </div>
+        <div class="card purple" style="text-align: left; max-width: 780px; margin: 0 auto 30px auto;">
+          <div class="card-title">What's Covered in Part 2:</div>
+          <div class="card-body">
+            <ul>
+              <li><strong>Copilot Fusion GA</strong> deep-dive &amp; dynamic routing topology.</li>
+              <li><strong>Copilot App &amp; Canvases</strong>: multi-session orchestration &amp; design mockups.</li>
+              <li><strong>Copilot Automations</strong>: event-triggered background agent workflows.</li>
+              <li><strong>Code Review Max &amp; Agent Merge</strong>: adversarial reviews &amp; auto-conflict fixes.</li>
+              <li><strong>Enterprise AI Usage Contracts</strong>: credit pools &amp; shared compute billing.</li>
+            </ul>
           </div>
         </div>
 
-        <div style="margin-top: 35px;">
-          <a href="../02-agentic-architecture/" class="deck-btn primary" style="padding: 10px 24px; font-size: 14px; display: inline-flex; margin: 0 auto;">
-            Launch Segment 2 Presentation ›
+        <div style="display: flex; justify-content: center; gap: 16px;">
+          <a href="../02-keynote-recap/" class="deck-btn primary" style="padding: 12px 28px; font-size: 15px; font-weight: 700;">
+            Continue to Part 2: Everything Announced Recap ›
           </a>
+        </div>
+        <div style="margin-top: 15px; font-size: 0.55em; color: var(--gh-muted);">
+          Tip: Press <kbd style="background: #21262d; border: 1px solid #30363d; padding: 2px 5px; border-radius: 4px; color: #c9d1d9;">J</kbd> anytime on this slide to jump directly to Part 2.
         </div>
 
         <aside class="notes">
-          Thank you all for listening to this quick debrief. 
-          That concludes the opening 4-minute overview. 
-          We can now either open up for immediate high-level questions, or dive directly into Segment 2 where we examine the technical architecture of multi-repo agent coordination and model routing.
+          Thank you all for listening to this opening debrief. 
+          Now, let's jump right into Part 2 of our presentation, where we walk through the full keynote recap video 
+          and explore each product announcement in technical detail. Click the button or press 'J' on your keyboard to continue!
         </aside>
       </section>
 
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
 
-  <!-- Shared Deck Runtime -->
   <script src="../../assets/js/deck-runtime.js"></script>
   <script>
-    // Initialize current presentation deck with pacing thresholds (Warn at 3m, Alert at 5m)
     initPresentationDeck({
       currentDeckId: "01-keynote-debrief",
-      warnSecs: 180,
-      alertSecs: 300
+      nextDeckUrl: "../02-keynote-recap/",
+      warnSecs: 180,  // 3 mins warn
+      alertSecs: 300  // 5 mins alert
     });
   </script>
 </body>

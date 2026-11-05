@@ -8,24 +8,19 @@
   window.PRESENTATION_DECKS = [
     {
       id: "01-keynote-debrief",
-      title: "1. Opening Keynote Debrief",
+      title: "Part 1: Keynote Opening Debrief",
       duration: "3–5 mins",
-      badge: "Keynote Overview",
+      badge: "Architecture Intro",
+      videoUrl: "https://www.youtube.com/watch?v=AArI948SDz8",
       url: "../01-keynote-debrief/"
     },
     {
-      id: "02-agentic-architecture",
-      title: "2. Agentic Architecture & Multi-Repo",
-      duration: "10–12 mins",
-      badge: "System Design",
-      url: "../02-agentic-architecture/"
-    },
-    {
-      id: "03-devops-governance",
-      title: "3. Platform Scale & Governance",
+      id: "02-keynote-recap",
+      title: "Part 2: Everything Announced Recap",
       duration: "8–10 mins",
-      badge: "Infrastructure & Security",
-      url: "../03-devops-governance/"
+      badge: "Full Product Breakdown",
+      videoUrl: "https://www.youtube.com/watch?v=xbCa0aa4tRM",
+      url: "../02-keynote-recap/"
     }
   ];
 
@@ -57,10 +52,10 @@
     if (menuEl) {
       menuEl.innerHTML = `
         <div style="padding: 6px 12px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--gh-muted); background: #161b22; border-bottom: 1px solid var(--gh-border);">
-          Switch Presentation Segment
+          Switch Presentation
         </div>
         <a href="../../" class="deck-dropdown-item" style="color: var(--gh-blue) !important; font-weight: 500;">
-          ← Back to Presentation Hub
+          ← Presentation Hub Portal
         </a>
       `;
 
@@ -122,6 +117,10 @@
       // 'N' toggles in-slide notes HUD
       if (e.key === 'n' || e.key === 'N') {
         window.toggleNotesOverlay();
+      }
+      // 'J' or 'P' to jump to next presentation if at the end
+      if ((e.key === 'j' || e.key === 'J') && options.nextDeckUrl) {
+        window.location.href = options.nextDeckUrl;
       }
       // Close dropdown on Escape
       if (e.key === 'Escape') {

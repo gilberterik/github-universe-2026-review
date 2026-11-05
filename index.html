@@ -18,7 +18,7 @@
     }
 
     .hub-container {
-      max-width: 1140px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 50px 24px 80px 24px;
       position: relative;
@@ -43,17 +43,17 @@
     }
 
     .hub-subtitle {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--gh-muted);
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
       line-height: 1.5;
     }
 
     .hub-segments-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 28px;
       margin-bottom: 50px;
     }
 
@@ -61,7 +61,7 @@
       background: var(--gh-card);
       border: 1px solid var(--gh-border);
       border-radius: 14px;
-      padding: 26px;
+      padding: 28px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -72,12 +72,12 @@
     .segment-card:hover {
       transform: translateY(-4px);
       border-color: #58a6ff88;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
     }
 
     .segment-card.featured {
       border-color: var(--gh-purple);
-      box-shadow: 0 0 25px rgba(137, 87, 229, 0.15);
+      box-shadow: 0 0 25px rgba(137, 87, 229, 0.18);
     }
 
     .segment-badge-row {
@@ -92,7 +92,6 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      color: var(--gh-muted);
     }
 
     .segment-duration {
@@ -106,7 +105,7 @@
     }
 
     .segment-title {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: #fff;
       margin: 0 0 10px 0;
@@ -120,16 +119,35 @@
       margin-bottom: 18px;
     }
 
+    .segment-source-video {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: #79c0ff;
+      text-decoration: none;
+      background: rgba(88, 166, 255, 0.08);
+      border: 1px solid rgba(88, 166, 255, 0.25);
+      border-radius: 6px;
+      padding: 4px 10px;
+      margin-bottom: 20px;
+      transition: background 0.2s;
+    }
+
+    .segment-source-video:hover {
+      background: rgba(88, 166, 255, 0.16);
+    }
+
     .segment-topics {
       list-style: none;
       padding: 0;
       margin: 0 0 24px 0;
-      font-size: 0.82rem;
+      font-size: 0.83rem;
       color: #c9d1d9;
     }
 
     .segment-topics li {
-      margin-bottom: 7px;
+      margin-bottom: 8px;
       display: flex;
       align-items: flex-start;
       gap: 8px;
@@ -147,9 +165,9 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 11px 18px;
+      padding: 12px 18px;
       border-radius: 8px;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.2s;
@@ -184,7 +202,7 @@
       border: 1px solid var(--gh-border);
       border-radius: 12px;
       padding: 24px;
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
     .guide-title {
@@ -224,7 +242,7 @@
 
     .hub-footer {
       text-align: center;
-      padding: 20px;
+      padding: 24px;
       font-size: 0.82rem;
       color: var(--gh-muted);
       border-top: 1px solid var(--gh-border-subtle);
@@ -237,84 +255,74 @@
   <div class="hub-container">
     <div class="hub-header">
       <div style="margin-bottom: 12px;">
-        <span class="badge-universe">GitHub Universe 2026 • Architecture Series</span>
+        <span class="badge-universe">GitHub Universe 2026 • Architecture Presentation Series</span>
       </div>
       <h1 class="hub-title">The Agentic Software Delivery System</h1>
       <p class="hub-subtitle">
-        Modular slide decks designed for an architecture team debrief. 
-        Present each segment independently or navigate across them seamlessly using the top HUD.
+        Two interconnected, beautifully formatted presentation decks for your architecture team talk. 
+        Start with Part 1 for your opening 3–5 minutes, then jump seamlessly into Part 2 for the full product and feature breakdown.
       </p>
     </div>
 
-    <!-- Segments Grid -->
+    <!-- Presentation Cards Grid -->
     <div class="hub-segments-grid">
 
-      <!-- SEGMENT 1: Keynote Debrief -->
+      <!-- PART 1: Keynote Debrief -->
       <div class="segment-card featured">
         <div>
           <div class="segment-badge-row">
-            <span class="segment-number" style="color: var(--gh-purple-light);">Segment 1 • Opening Talk</span>
+            <span class="segment-number" style="color: var(--gh-purple-light);">Part 1 • Opening Talk</span>
             <span class="segment-duration">⏱️ 3–5 Mins</span>
           </div>
-          <h2 class="segment-title">Keynote Debrief</h2>
+          <h2 class="segment-title">Keynote Debrief &amp; Architecture Shift</h2>
           <p class="segment-description">
-            The opening minutes of your talk. Covers the high-level macro shift from Jay Parikh, key Octoverse milestones, Copilot Fusion, and core announcements.
+            Calibrated specifically for the opening few minutes of your talk. Covers Jay Parikh's thesis on the inflection point of software engineering, Octoverse stats, and core takeaways.
           </p>
+
+          <a href="https://www.youtube.com/watch?v=AArI948SDz8" target="_blank" class="segment-source-video">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Source: Full Keynote Video (AArI948SDz8)
+          </a>
+
           <ul class="segment-topics">
             <li><strong>225M Developers &amp; &gt;40% Agent PRs:</strong> The new engineering bottleneck.</li>
             <li><strong>Copilot Fusion:</strong> Dynamic model routing across Claude, GPT-4o, and Gemini.</li>
-            <li><strong>Projects &amp; Cloud Continuity:</strong> Burke Holland &amp; Damian Brady demos.</li>
-            <li><strong>4 Architectural Takeaways:</strong> Immediate high-level action items.</li>
+            <li><strong>Projects &amp; Cloud Continuity:</strong> Live demos from Burke Holland &amp; Damian Brady.</li>
+            <li><strong>Seamless Jump:</strong> Action button on final slide jumps straight into Part 2.</li>
           </ul>
         </div>
         <a href="presentations/01-keynote-debrief/" class="btn-launch primary">
-          Launch Segment 1 Deck ›
+          Launch Part 1: Keynote Debrief ›
         </a>
       </div>
 
-      <!-- SEGMENT 2: Agentic Architecture & Multi-Repo -->
+      <!-- PART 2: Keynote Recap & Product Breakdown -->
       <div class="segment-card">
         <div>
           <div class="segment-badge-row">
-            <span class="segment-number" style="color: var(--gh-blue-light);">Segment 2 • System Design</span>
-            <span class="segment-duration">⏱️ 10–12 Mins</span>
-          </div>
-          <h2 class="segment-title">Agentic Architecture &amp; Multi-Repo</h2>
-          <p class="segment-description">
-            A technical deep dive into orchestrating multi-repository agent fleets, contract-first APIs, and ephemeral cloud sandboxes.
-          </p>
-          <ul class="segment-topics">
-            <li><strong>Copilot Fusion Pipeline:</strong> AST context, decomposition, and model tiers.</li>
-            <li><strong>Multi-Repo PR Chains:</strong> Coordinating contracts, backends, and clients.</li>
-            <li><strong>Contract-First Mandate:</strong> Why OpenAPI &amp; Protobuf prevent hallucination.</li>
-            <li><strong>Ephemeral Execution Sandboxes:</strong> Eliminating local workstation drift.</li>
-          </ul>
-        </div>
-        <a href="presentations/02-agentic-architecture/" class="btn-launch secondary">
-          Launch Segment 2 Deck ›
-        </a>
-      </div>
-
-      <!-- SEGMENT 3: Platform Scale & Governance -->
-      <div class="segment-card">
-        <div>
-          <div class="segment-badge-row">
-            <span class="segment-number" style="color: var(--gh-green-light);">Segment 3 • DevOps & Security</span>
+            <span class="segment-number" style="color: var(--gh-blue-light);">Part 2 • Full Recap</span>
             <span class="segment-duration">⏱️ 8–10 Mins</span>
           </div>
-          <h2 class="segment-title">Platform Scale &amp; Governance</h2>
+          <h2 class="segment-title">Everything Announced: Keynote Recap</h2>
           <p class="segment-description">
-            Examining how Git was re-engineered for agent write scale, zero-trust Actions lockfiles, multi-cloud runners, and PR blast-radius policies.
+            A comprehensive, deep-dive breakdown based on the official keynote recap video. Systematically covers every major product release and infrastructure innovation.
           </p>
+
+          <a href="https://www.youtube.com/watch?v=xbCa0aa4tRM" target="_blank" class="segment-source-video">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Source: Official Recap Video (xbCa0aa4tRM)
+          </a>
+
           <ul class="segment-topics">
-            <li><strong>Rebuilding Git:</strong> Lockless ref updates and delta compression for agent throughput.</li>
-            <li><strong>Actions Workflow Lockfiles:</strong> Cryptographic SHA pinning for supply chain defense.</li>
-            <li><strong>Multi-Cloud Compute:</strong> Native runner jobs inside customer AWS/Azure VPCs.</li>
-            <li><strong>Blast-Radius Governance:</strong> Agent auto-merges vs. mandatory architect gates.</li>
+            <li><strong>Copilot App &amp; Canvases:</strong> Multi-session orchestration &amp; design tokens.</li>
+            <li><strong>Copilot Automations:</strong> Event-driven agents responding to production signals.</li>
+            <li><strong>Code Review "Max":</strong> Multi-model adversarial code and taint checks.</li>
+            <li><strong>Enterprise Usage Contracts:</strong> Credit pools &amp; shared runner/agent billing.</li>
+            <li><strong>Git Core Rebuilt:</strong> Scaling the storage engine for 45B+ Actions jobs.</li>
           </ul>
         </div>
-        <a href="presentations/03-devops-governance/" class="btn-launch secondary">
-          Launch Segment 3 Deck ›
+        <a href="presentations/02-keynote-recap/" class="btn-launch secondary">
+          Launch Part 2: Recap Breakdown ›
         </a>
       </div>
 
@@ -324,24 +332,24 @@
     <div class="hub-guide-card">
       <h3 class="guide-title">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Presenter Guide &amp; Keyboard Controls
+        Presenter Navigation &amp; Keyboard Controls
       </h3>
       <div class="guide-grid">
         <div class="guide-item">
+          <strong><kbd>J</kbd> Jump Between Decks</strong>
+          <p>Press <kbd>J</kbd> on the final slide of Part 1 to transition directly into Part 2 seamlessly.</p>
+        </div>
+        <div class="guide-item">
           <strong><kbd>S</kbd> Dual Speaker View</strong>
-          <p>Launches official presenter window with live slide notes, upcoming previews, and timer.</p>
+          <p>Opens official presenter window with notes, pacing timer, and upcoming slide previews.</p>
         </div>
         <div class="guide-item">
           <strong><kbd>N</kbd> In-Slide Notes HUD</strong>
-          <p>Toggles slide talking points directly on screen in a dark glass HUD (single monitor friendly).</p>
+          <p>Toggles slide talking points directly on screen inside a dark glass HUD overlay.</p>
         </div>
         <div class="guide-item">
-          <strong><kbd>Esc</kbd> Slide Matrix</strong>
-          <p>Zooms out to bird's-eye slide overview for jumping directly to any topic during Q&amp;A.</p>
-        </div>
-        <div class="guide-item">
-          <strong>⏱️ Live Pacing Stopwatch</strong>
-          <p>Top HUD stopwatch color-alerts when approaching segment time limits.</p>
+          <strong><kbd>Esc</kbd> / <kbd>O</kbd> Slide Matrix</strong>
+          <p>Zooms out to bird's-eye slide overview for jumping directly to any slide during team Q&amp;A.</p>
         </div>
       </div>
     </div>
@@ -350,7 +358,7 @@
   <footer class="hub-footer">
     <span>GitHub Universe 2026 Keynote Architecture Review • Hosted on GitHub Pages</span>
     <span style="margin: 0 10px;">•</span>
-    <a href="https://www.youtube.com/watch?v=AArI948SDz8" target="_blank" style="color: var(--gh-blue); text-decoration: none;">Watch Keynote on YouTube</a>
+    <a href="https://github.com/gilberterik/github-universe-2026-review" target="_blank" style="color: var(--gh-blue); text-decoration: none;">GitHub Repository</a>
   </footer>
 </body>
 </html>

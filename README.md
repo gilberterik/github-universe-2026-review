@@ -1,7 +1,7 @@
 # GitHub Universe 2026: Architecture Presentation Series
 
 > **Modular Multi-Presentation Platform for Architecture Teams**  
-> Covering the official **GitHub Universe 2026 Opening Keynote** ([Watch on YouTube](https://www.youtube.com/watch?v=AArI948SDz8))  
+> Covering the official **GitHub Universe 2026 Opening Keynote** ([Watch Keynote](https://www.youtube.com/watch?v=AArI948SDz8)) and **Official Keynote Recap** ([Watch Recap](https://www.youtube.com/watch?v=xbCa0aa4tRM))  
 > Held October 28–29, 2026 at the Fort Mason Center in San Francisco, CA.
 
 ---
@@ -13,14 +13,13 @@ Once enabled in repository settings (**Settings → Pages → Branch: `main`, Fo
 
 ---
 
-## 📐 Architecture: Multi-Presentation Modular System
+## 📑 Presentation Architecture & Flow
 
-This repository is designed to host **multiple focused presentation segments** that share a single unified design system, HUD controls, stopwatch timer, and runtime engine—avoiding a monolithic "mega-presentation".
+This repository hosts **two interconnected presentations** sharing a unified design system and runtime engine:
 
 ```
 github-universe-2026-review/
-├── .nojekyll                            # Enables GitHub Pages raw asset serving
-├── index.html                           # Central Presentation Portal / Hub
+├── index.html                           # 🌟 Central Presentation Portal / Hub
 ├── README.md                            # Documentation & speaker guides
 ├── assets/
 │   ├── css/
@@ -28,72 +27,64 @@ github-universe-2026-review/
 │   └── js/
 │       └── deck-runtime.js              # Shared Reveal bootstrap, timer, HUD & switcher
 └── presentations/
-    ├── 01-keynote-debrief/              # Segment 1: Opening Talk (3–5 mins)
-    │   └── index.html
-    ├── 02-agentic-architecture/         # Segment 2: System Design & Multi-Repo (10–12 mins)
-    │   └── index.html
-    └── 03-devops-governance/            # Segment 3: Platform Scale & Security (8–10 mins)
-        └── index.html
+    ├── 01-keynote-debrief/              # ⏱️ Part 1: Opening Talk (3–5 mins)
+    │   └── index.html                   # [Video: AArI948SDz8]
+    └── 02-keynote-recap/                # ⏱️ Part 2: Everything Announced (8–10 mins)
+        └── index.html                   # [Video: xbCa0aa4tRM]
 ```
 
+### 🔗 Seamless Flow Between Presentations
+* **At the end of Part 1 (Slide 9):**  
+  There is a prominent **`Continue to Part 2: Everything Announced Recap ›`** callout button. You can also press <kbd>J</kbd> on your keyboard to instantly transition to Part 2 without touching the mouse.
+* **Top HUD Dropdown:**  
+  Both decks include an instant switcher dropdown in the top bar to hop between Part 1, Part 2, or back to the Hub at any time during your talk.
+
 ---
 
-## 🎯 Presentation Segments
+## 🎯 The Two Presentations
 
-### [Segment 1: Opening Keynote Debrief](file:///C:/Users/erik/src/github.com/github-universe-2026-review/presentations/01-keynote-debrief/index.html)
-* **Duration:** 3–5 minutes (Opening of your talk)
+### [Part 1: Keynote Debrief & Architecture Shift](file:///C:/Users/erik/src/github.com/github-universe-2026-review/presentations/01-keynote-debrief/index.html)
+* **Source Video:** [Opening Keynote (AArI948SDz8)](https://www.youtube.com/watch?v=AArI948SDz8)
+* **Duration:** 3–5 minutes (Opening minutes of your talk)
 * **Pacing Thresholds:** Amber warning at 3:00, red alert at 5:00.
-* **Topics:** Jay Parikh's macro shift thesis, Octoverse inflection points (225M developers, >40% agent PRs), Copilot Fusion announcement, Cassidy Williams & Burke Holland demos, and 4 high-level architectural imperatives.
+* **Topics:** 
+  - Octoverse 2026 milestones (225M developers, >40% agent PRs).
+  - Jay Parikh's thesis: the shift from single-developer autocomplete to autonomous agent fleets.
+  - Copilot Fusion dynamic model routing (Claude, GPT-4o, Gemini).
+  - Cassidy Williams & Burke Holland live multi-repo demos.
+  - Damian Brady's cross-surface mobile-to-cloud sandbox demo.
+  - 4 high-level architectural takeaways.
+  - **Final Slide:** Action button and keyboard shortcut (<kbd>J</kbd>) jumping directly to Part 2!
 
-### [Segment 2: Agentic Architecture & Multi-Repo Systems](file:///C:/Users/erik/src/github.com/github-universe-2026-review/presentations/02-agentic-architecture/index.html)
-* **Duration:** 10–12 minutes (System design deep dive)
-* **Pacing Thresholds:** Amber warning at 10:00, red alert at 12:00.
-* **Topics:** Copilot Fusion dynamic model routing topology, multi-repo synchronization chains, the OpenAPI/Protobuf contract-first mandate, and ephemeral cloud sandboxes.
-
-### [Segment 3: Platform Scale & Governance](file:///C:/Users/erik/src/github.com/github-universe-2026-review/presentations/03-devops-governance/index.html)
-* **Duration:** 8–10 minutes (Infrastructure & DevOps deep dive)
+### [Part 2: Everything Announced — Official Keynote Recap](file:///C:/Users/erik/src/github.com/github-universe-2026-review/presentations/02-keynote-recap/index.html)
+* **Source Video:** [Keynote Recap Video (xbCa0aa4tRM)](https://www.youtube.com/watch?v=xbCa0aa4tRM)
+* **Duration:** 8–10 minutes (Comprehensive product and feature breakdown)
 * **Pacing Thresholds:** Amber warning at 8:00, red alert at 10:00.
-* **Topics:** Rebuilding Git storage for agent write throughput, Actions Workflow Lockfiles, Multi-Cloud Compute VPC runners, blast-radius CODEOWNERS policies, and Dependabot Reachability Analysis.
+* **Topics:**
+  - Copilot Fusion GA and subtask decomposition.
+  - The dedicated Copilot App and Multi-Session Canvases (Figma/design token ingestion).
+  - Copilot Projects: Cross-repository synchronization chains.
+  - Copilot Automations: Event-driven background agents responding to production alerts.
+  - Code Review "Max": Multi-model adversarial code reviews & security taint analysis.
+  - Agent Merge: Autonomous semantic merge conflict and CI remediation.
+  - Enterprise Shift: Consumption AI usage contracts & unified credit pools.
+  - Rebuilding Git: Lockless ref updates and storage scaling for 45B+ Actions jobs.
+  - Architecture Action Plan & team discussion kickoff.
 
 ---
 
-## 🕹️ Unified Presenter Controls
+## 🕹️ Presenter Keyboard Shortcuts
 
-Every presentation segment inherits the following built-in controls:
-
-| Control / Shortcut | Action |
-|---|---|
-| **Top HUD Dropdown** | Instant segment switcher to hop between Segment 1, 2, 3, or return to the Hub |
-| <kbd>→</kbd> / <kbd>Space</kbd> | Next slide |
-| <kbd>←</kbd> | Previous slide |
-| <kbd>S</kbd> | Official dual-screen presenter window with slide notes, upcoming preview, and timer |
-| <kbd>N</kbd> or **Notes Button** | In-slide notes frosted-glass HUD (single-screen friendly) |
-| <kbd>Esc</kbd> or <kbd>O</kbd> | Zoom out to bird's-eye slide matrix |
-| <kbd>F</kbd> | Fullscreen toggle |
-| **00:00 Stopwatch** | Real-time pacing timer customized to each segment's duration targets |
-
----
-
-## ➕ How to Add Another Presentation Segment
-
-Adding a new presentation takes less than 2 minutes:
-
-1. Create a new directory under `presentations/`, e.g. `presentations/04-cost-optimization/`:
-   ```powershell
-   New-Item -ItemType Directory -Path "presentations\04-cost-optimization"
-   ```
-2. Copy `presentations/01-keynote-debrief/index.html` into your new folder.
-3. In your new `index.html`:
-   * Update the slide contents.
-   * Update the runtime initialization call at the bottom:
-     ```javascript
-     initPresentationDeck({
-       currentDeckId: "04-cost-optimization",
-       warnSecs: 300,  // 5 mins warn
-       alertSecs: 420  // 7 mins alert
-     });
-     ```
-4. Add the entry to `window.PRESENTATION_DECKS` inside [assets/js/deck-runtime.js](file:///C:/Users/erik/src/github.com/github-universe-2026-review/assets/js/deck-runtime.js) and a card on [index.html](file:///C:/Users/erik/src/github.com/github-universe-2026-review/index.html).
+| Shortcut | Action | Details |
+|---|---|---|
+| <kbd>→</kbd> / <kbd>Space</kbd> | **Next Slide** | Advances forward |
+| <kbd>←</kbd> | **Previous Slide** | Steps back |
+| <kbd>J</kbd> | **Jump to Next Deck** | Transitions from the end of Part 1 directly to Part 2 |
+| <kbd>S</kbd> | **Dual Speaker View** | Opens official presenter window with notes and timer |
+| <kbd>N</kbd> or **Notes** | **In-Slide Notes HUD** | Opens frosted-glass talking points directly on screen |
+| <kbd>Esc</kbd> or <kbd>O</kbd> | **Slide Matrix** | Bird's-eye view to jump directly to any slide during Q&A |
+| <kbd>F</kbd> | **Fullscreen** | Toggles full-screen mode |
+| **00:00 Stopwatch** | **Pacing Timer** | Real-time counter with automatic amber/red pacing alerts |
 
 ---
 
@@ -108,4 +99,4 @@ Adding a new presentation takes less than 2 minutes:
    * **Source:** `Deploy from a branch`
    * **Branch:** `main`
    * **Folder:** `/ (root)`
-3. Save. The portal and all segmented presentations will deploy live automatically.
+3. Save. The portal and both presentations will deploy live automatically at `https://gilberterik.github.io/github-universe-2026-review/`.

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Part 2: Everything Announced Recap - GitHub Universe 2026</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2358a6ff'><path d='M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'/></svg>">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+
+  <link rel="stylesheet" href="../../assets/css/deck-theme.css">
+</head>
+<body>
+  <div class="universe-glow"></div>
+
+  <!-- Top HUD Header -->
+  <div class="top-hud">
+    <div class="hud-left">
+      <a href="../../" title="Back to Presentation Portal" style="font-weight: 600;">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>
+        Hub
+      </a>
+      <span class="badge-universe">Part 2</span>
+
+      <div class="deck-switcher">
+        <button class="deck-select-btn" onclick="toggleDeckMenu()">
+          <span>Recap: Everything Announced (8–10m)</span>
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z"/></svg>
+        </button>
+        <div class="deck-dropdown-menu" id="deckDropdownMenu"></div>
+      </div>
+    </div>
+
+    <div class="hud-right">
+      <span class="live-timer" id="presentationTimer" title="Presentation Time">00:00</span>
+      <a href="../01-keynote-debrief/" style="color: var(--gh-muted);" title="Jump back to Part 1">‹ Part 1</a>
+      <a href="https://www.youtube.com/watch?v=xbCa0aa4tRM" target="_blank" rel="noopener" title="Watch official recap video">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Recap Video
+      </a>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="deck-controls">
+    <button class="deck-btn" onclick="toggleNotesOverlay()" title="Toggle Speaker Notes [N]">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Notes
+    </button>
+    <button class="deck-btn" onclick="Reveal.prev()" title="Previous Slide [←]">‹ Prev</button>
+    <button class="deck-btn primary" onclick="Reveal.next()" title="Next Slide [→]">Next ›</button>
+    <button class="deck-btn" onclick="Reveal.toggleOverview()" title="Slide Overview [Esc / O]">Overview</button>
+    <button class="deck-btn" onclick="toggleFullScreen()" title="Fullscreen [F]">⛶</button>
+  </div>
+
+  <div class="notes-overlay" id="notesOverlay">
+    <div class="notes-header">
+      <span>🎙️ SPEAKER SCRIPT (PART 2 • 8–10 MINS)</span>
+      <span style="cursor: pointer; color: var(--gh-muted);" onclick="toggleNotesOverlay()">✕</span>
+    </div>
+    <div id="notesContent">Loading talking points...</div>
+  </div>
+
+  <div class="key-hints">
+    <span>Navigate: <kbd>→</kbd> <kbd>Space</kbd></span>
+    <span>Overview: <kbd>Esc</kbd></span>
+    <span>Speaker View: <kbd>S</kbd></span>
+    <span>Notes: <kbd>N</kbd></span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: Title -->
+      <section>
+        <div style="margin-bottom: 15px;">
+          <span class="badge-universe">Part 2 • Official Keynote Recap Breakdown</span>
+        </div>
+        <h1>Everything Announced</h1>
+        <h2 style="font-size: 1.25em; color: #a5d6ff; margin-bottom: 8px;">GitHub Universe 2026 Keynote Recap</h2>
+        <p class="slide-subtitle">Comprehensive Product &amp; Architectural Breakdown for Engineering Leaders</p>
+
+        <div style="display: inline-flex; gap: 14px; margin-top: 15px; font-size: 0.6em; color: var(--gh-muted);">
+          <span>Based on the official recap video (<strong>xbCa0aa4tRM</strong>)</span>
+        </div>
+
+        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 14px;">
+          <a href="../01-keynote-debrief/" class="deck-btn" style="padding: 10px 18px; font-size: 13px;">
+            ‹ Back to Part 1: Keynote Intro
+          </a>
+          <button class="deck-btn primary" style="padding: 10px 22px; font-size: 13px;" onclick="Reveal.next()">
+            Start Product Breakdown ›
+          </button>
+        </div>
+
+        <aside class="notes">
+          Welcome to Part 2 of our architecture debrief. 
+          While Part 1 covered our opening impressions and Jay Parikh's thesis, this presentation walks systematically through 
+          the official 'Everything Announced' keynote recap video. 
+          Over the next 8 minutes, we will unpack each announced feature—from Copilot Fusion and Canvases to event-driven Automations, 
+          Code Review Max, usage-based contracts, and the underlying Git platform re-engineering.
+        </aside>
+      </section>
+
+      <!-- SLIDE 2: The Macro Landscape & Octoverse Numbers -->
+      <section>
+        <h2>The Global Developer Landscape</h2>
+        <p class="slide-subtitle">Key metrics highlighted in the official keynote recap</p>
+
+        <div class="grid-3" style="margin-bottom: 24px;">
+          <div class="metric-box">
+            <div class="metric-value purple">225M+</div>
+            <div class="metric-label">Registered Developers</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value blue">34.3B</div>
+            <div class="metric-label">Git Commits Processed</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value green">45B+</div>
+            <div class="metric-label">GitHub Actions Jobs Run</div>
+          </div>
+        </div>
+
+        <div class="card" style="text-align: left;">
+          <div class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#79c0ff" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>
+            The Keynote Recap's Core Thesis
+          </div>
+          <div class="card-body">
+            Over <strong>40% of all newly created pull requests</strong> across GitHub now start with an AI agent's initial draft. 
+            Software delivery has fundamentally inverted: human engineers are spending more time reviewing, governing, and orchestrating architectural intent than manually typing syntax.
+          </div>
+        </div>
+
+        <aside class="notes">
+          The recap video begins with the sheer scale of the platform today: 225 million developers, over 34 billion commits, 
+          and 45 billion Actions executions. 
+          More importantly, over 40 percent of all pull requests created globally now start with an agent's first draft. 
+          This confirms that the tooling we adopt is no longer an optional speed booster—it's the baseline delivery substrate for our industry.
+        </aside>
+      </section>
+
+      <!-- SLIDE 3: Copilot Fusion -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> Feature Announcement #1</span>
+        <h2>Copilot Fusion (GA)</h2>
+        <p class="slide-subtitle">Intelligent multi-model routing engine</p>
+
+        <div class="grid-2">
+          <div class="card purple">
+            <div class="card-title">What Was Announced</div>
+            <div class="card-body">
+              <ul>
+                <li><strong>General Availability:</strong> Copilot Fusion is now GA across GitHub Enterprise.</li>
+                <li><strong>Dynamic Multi-Model Switching:</strong> Automatically routes sub-tasks across Claude 3.5/3.7, GPT-4o, OpenAI o1, and Gemini.</li>
+                <li><strong>Task Specialization:</strong> Fast models handle syntax, documentation, and unit tests; deep reasoning models handle refactoring and AST analysis.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card blue">
+            <div class="card-title">Architectural Impact</div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Zero Model Lock-in:</strong> Eliminates enterprise dependency on a single AI lab or provider.</li>
+                <li><strong>Cost &amp; SLA Optimization:</strong> Maximizes quality while keeping inference cost and latency bounded.</li>
+                <li><strong>Model Routing Abstraction:</strong> Internal tools must follow this design pattern: decouple agent orchestrators from model endpoints.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Feature number one in the recap is Copilot Fusion, which has reached General Availability. 
+          Fusion is the intelligent routing brain. Instead of forcing developers to pick one model for everything, 
+          Fusion routes automatically: fast, lightweight models for routine boilerplate and lint fixes, 
+          and heavy reasoning models like Claude 3.7 or o1 for complex multi-file architectural changes. 
+          For our architecture team, this validates our approach: never hardcode to a single LLM API.
+        </aside>
+      </section>
+
+      <!-- SLIDE 4: The Copilot App & Multi-Session Canvases -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> Feature Announcement #2</span>
+        <h2>The Copilot App &amp; Canvases</h2>
+        <p class="slide-subtitle">Expanding beyond the IDE sidebar into a dedicated workspace</p>
+
+        <div class="grid-2">
+          <div class="card blue">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#79c0ff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Copilot App &amp; Canvases
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Dedicated Canvas Space:</strong> Visual interactive canvas connecting issues, PRs, architecture diagrams, and design tokens.</li>
+                <li><strong>Multi-Session Orchestration:</strong> Run and monitor 5+ agent sessions concurrently across different projects.</li>
+                <li><strong>Figma &amp; Design Ingestion:</strong> Ingests UI mockups and translates them directly into component hierarchies.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card green">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56d364" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+              Cross-Surface Session Continuity
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Persistent Cloud State:</strong> Sessions live in the cloud, not on developer laptops.</li>
+                <li><strong>Seamless Surface Handoff:</strong> Start an investigation on mobile, refine on Web canvas, execute in terminal CLI, and finalize in VS Code.</li>
+                <li><strong>No Build Context Lost:</strong> Terminal history, hot reproduction sandboxes, and git diffs remain synced.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Feature number two: The dedicated Copilot App and Canvases. 
+          GitHub realized that a narrow 300-pixel chat sidebar inside VS Code is too cramped for orchestrating full features. 
+          The Copilot App gives developers a full canvas where they can visually link Figma designs, Jira/GitHub issues, and architecture specs. 
+          And with cross-surface continuity, sessions are persistent in the cloud—allowing engineers to start work on a phone or browser and pick it up in VS Code without re-running builds.
+        </aside>
+      </section>
+
+      <!-- SLIDE 5: Copilot Projects (Multi-Repo) -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> Feature Announcement #3</span>
+        <h2>Copilot Projects (Public Preview)</h2>
+        <p class="slide-subtitle">Cross-repository orchestration for distributed systems</p>
+
+        <div class="card blue" style="text-align: left; margin-bottom: 20px;">
+          <div class="card-title">Breaking the Single-Repo Barrier</div>
+          <div class="card-body">
+            Agents historically failed when microservices were split across multiple repositories. 
+            <em>Copilot Projects</em> introduces cross-repo context trees, allowing a single task to generate synchronized PRs across contract repos, backends, and frontend consumers.
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title" style="color: var(--gh-purple-light);">Context Graphs</div>
+            <div class="card-body">
+              Maps API contracts and dependency relationships between repos automatically.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color: var(--gh-blue-light);">Synchronized PRs</div>
+            <div class="card-body">
+              Generates linked PR chains with shared trace IDs across downstream consumers.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color: var(--gh-green-light);">Unified Testing</div>
+            <div class="card-body">
+              Runs end-to-end integration tests in cloud sandboxes across the linked branch matrix.
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Announcement number three is Copilot Projects, now in public preview. 
+          This solves the biggest pain point our architecture team has voiced: microservice fragmentation. 
+          Instead of having to prompt an agent separately in three different repositories, 
+          Copilot Projects maintains a cross-repository context graph. 
+          It can execute a feature end-to-end: updating a shared Protobuf schema, adjusting the backend service, and updating the client consumer in one atomic flow.
+        </aside>
+      </section>
+
+      <!-- SLIDE 6: Copilot Automations -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> Feature Announcement #4</span>
+        <h2>Copilot Automations</h2>
+        <p class="slide-subtitle">Event-driven autonomous background workflows</p>
+
+        <div class="grid-2">
+          <div class="card green">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#56d364" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              Signal-Triggered Agents
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Production Event Triggers:</strong> Responds autonomously to monitoring alerts (Datadog, Sentry, CloudWatch) or newly opened issues.</li>
+                <li><strong>Reproduction in Sandbox:</strong> Spins up a clean cloud container, checks out code, and attempts to reproduce the stack trace.</li>
+                <li><strong>Draft Fix &amp; Unit Tests:</strong> Authors candidate patch, adds regression unit test, and opens a draft PR with full reproduction logs.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card coral">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f78166" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Architectural Guardrails
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Credit &amp; Rate Limits:</strong> Team-scoped dollar credit limits prevent runaway agent loops.</li>
+                <li><strong>Sandbox Isolation:</strong> Agents run in restricted micro-VMs with zero production write access.</li>
+                <li><strong>Human in the Loop:</strong> Autonomous PRs require human review unless specifically designated on safe paths.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Feature four is Copilot Automations. 
+          This moves Copilot from a developer-driven tool to an event-driven system. 
+          When an alert fires in production or a high-priority bug is filed, Copilot Automations can immediately spin up an isolated sandbox, 
+          reproduce the bug against integration tests, write a fix with a new unit test, and have a draft PR ready for human review before the on-call engineer even opens their laptop.
+        </aside>
+      </section>
+
+      <!-- SLIDE 7: Code Review "Max" & Agent Merge -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> Feature Announcement #5</span>
+        <h2>Code Review "Max" &amp; Agent Merge</h2>
+        <p class="slide-subtitle">Adversarial multi-model code review and autonomous conflict resolution</p>
+
+        <div class="grid-2">
+          <div class="card purple">
+            <div class="card-title">Code Review "Max" (Public Preview)</div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Multi-Model Adversarial Review:</strong> Multiple models critique incoming diffs from distinct perspectives (security, performance, architectural invariants).</li>
+                <li><strong>Deep Multi-File Context:</strong> Scans not just the diff, but the entire call graph and downstream callers.</li>
+                <li><strong>Security Taint Analysis:</strong> Traces user-controlled inputs across boundaries to prevent injection vulnerabilities.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card blue">
+            <div class="card-title">Agent Merge &amp; Auto-Rebase</div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Semantic Conflict Resolution:</strong> Agents understand code syntax to resolve non-trivial git merge conflicts automatically.</li>
+                <li><strong>CI Failure Remediation:</strong> When a PR fails unit tests, Agent Merge diagnoses the failure, patches the branch, and re-triggers CI.</li>
+                <li><strong>Path-Scoped Approvals:</strong> Admins grant auto-approval permissions on designated safe file patterns (docs, schemas).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Feature five: Code Review 'Max' and Agent Merge. 
+          Code Review Max introduces deep, multi-model adversarial reviews for high-risk PRs. 
+          Instead of a superficial linter, it examines full call graphs and security taint paths. 
+          Meanwhile, Agent Merge eliminates one of our biggest developer time-sinks: rebasing stale branches and fixing broken CI runs. 
+          The agent automatically repairs semantic conflicts and re-runs the tests.
+        </aside>
+      </section>
+
+      <!-- SLIDE 8: Enterprise AI Usage-Based Contracts -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> Feature Announcement #6</span>
+        <h2>Usage-Based Enterprise Contracts</h2>
+        <p class="slide-subtitle">Shifting from rigid per-seat licensing to consumption credit pools</p>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">The Per-Seat Dilemma</div>
+            <div class="card-body">
+              <ul>
+                <li>Traditional licensing forced enterprises to purchase flat monthly licenses per developer seat.</li>
+                <li>Did not account for variable agent compute, heavy reasoning models, or sporadic background automation workloads.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card green">
+            <div class="card-title">New Usage &amp; Credit Model</div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Consumption-Based Option:</strong> Enterprise customers can choose a unified consumption contract backed by AI credits.</li>
+                <li><strong>Consolidated Pool:</strong> Shared dollar pool covers GitHub Actions runners, Copilot cloud sandboxes, and advanced model inferences (e.g. Code Review Max).</li>
+                <li><strong>Existing Plans Protected:</strong> Teams on traditional per-seat subscriptions can remain on their existing structure.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Feature six is a major commercial and administrative shift. 
+          GitHub introduced an enterprise contract option centered around AI usage credits rather than strictly per-seat licenses. 
+          This is crucial as we deploy autonomous agents: agents don't have seats; they consume compute. 
+          A unified dollar-based credit pool allows us to balance spend fluidly between CI runners, cloud sandboxes, and agent tasks.
+        </aside>
+      </section>
+
+      <!-- SLIDE 9: Git Infrastructure Re-Engineering -->
+      <section>
+        <span class="speaker-pill"><span class="dot"></span> Feature Announcement #7</span>
+        <h2>Rebuilding Git for 45B+ Actions</h2>
+        <p class="slide-subtitle">Underlying platform engineering to withstand agent write storms</p>
+
+        <div class="grid-3">
+          <div class="card coral">
+            <div class="card-title">Lockless Ref Updates</div>
+            <div class="card-body">
+              Eliminated branch write locks in the core Git storage layer, allowing thousands of concurrent agent PRs and branch updates without contention.
+            </div>
+          </div>
+
+          <div class="card blue">
+            <div class="card-title">Actions Workflow Lockfiles</div>
+            <div class="card-body">
+              Cryptographic SHA pinning for all GitHub Actions dependencies, locking CI supply chains against tag tampering and upstream compromise.
+            </div>
+          </div>
+
+          <div class="card purple">
+            <div class="card-title">Multi-Cloud Runners</div>
+            <div class="card-body">
+              Native scheduling of GitHub Actions Linux jobs directly inside customer AWS and Azure VPCs with direct access to private corporate endpoints.
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Finally, the keynote recap highlighted GitHub's deep infrastructure investments. 
+          Git was never designed for millions of AI agents committing simultaneously. 
+          GitHub re-engineered the underlying ref storage to be completely lockless, eliminating write contention. 
+          And on CI/CD, Actions Workflow Lockfiles give us zero-trust supply chain protection, while Multi-Cloud Runners let us execute builds directly inside our AWS VPC.
+        </aside>
+      </section>
+
+      <!-- SLIDE 10: Summary & Architecture Action Plan -->
+      <section>
+        <div style="margin-bottom: 15px;">
+          <span class="badge-universe">Debrief Complete</span>
+        </div>
+        <h1>Keynote Recap Summary</h1>
+        <p class="slide-subtitle">How our architecture team should respond to GitHub Universe 2026</p>
+
+        <div class="grid-2" style="margin-top: 25px;">
+          <div class="card blue">
+            <div class="card-title">Immediate Wins (This Month)</div>
+            <div class="card-body">
+              <ul>
+                <li>Enable <strong>Actions Workflow Lockfiles</strong> across our core repositories.</li>
+                <li>Pilot <strong>Dependabot Reachability Analysis</strong> for JS/TS to slash alert backlog.</li>
+                <li>Audit internal scripts to ensure compatibility with <strong>Copilot Fusion</strong> model routing.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card purple">
+            <div class="card-title">Quarterly Architecture Goals</div>
+            <div class="card-body">
+              <ul>
+                <li>Establish <strong>strict OpenAPI &amp; Protobuf contract registries</strong> to enable multi-repo Copilot Projects.</li>
+                <li>Define <strong>path-scoped CODEOWNERS policies</strong> for autonomous Agent Merges.</li>
+                <li>Migrate local dev setup scripts to <strong>ephemeral containerized cloud sandboxes</strong>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 35px; display: flex; justify-content: center; gap: 14px;">
+          <a href="../01-keynote-debrief/" class="deck-btn" style="padding: 10px 20px; font-size: 13px;">
+            ‹ Return to Part 1: Keynote Intro
+          </a>
+          <a href="../../" class="deck-btn primary" style="padding: 10px 24px; font-size: 13px;">
+            Return to Presentation Hub Portal ›
+          </a>
+        </div>
+
+        <aside class="notes">
+          To wrap up Part 2: we have a clear action plan. 
+          Immediate wins: turn on Actions lockfiles, activate Dependabot reachability analysis, and ensure model-agnostic tooling. 
+          Quarterly goals: contract-first schemas, path-scoped CODEOWNERS for agent merges, and cloud sandboxes. 
+          Let's open it up for our team discussion!
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+
+  <script src="../../assets/js/deck-runtime.js"></script>
+  <script>
+    initPresentationDeck({
+      currentDeckId: "02-keynote-recap",
+      warnSecs: 480,  // 8 mins warn
+      alertSecs: 600  // 10 mins alert
+    });
+  </script>
+</body>
+</html>
